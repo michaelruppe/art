@@ -6,9 +6,9 @@ class Mover {
   float mass;
   float G;              // Universal Gravitational Constant
 
-  Mover(float m, PVector focus, float r, PVector velocity_) {
-    mass = m;
-    location = new PVector(focus.x + r, focus.y); // Start all planets aligned for simplicity
+  Mover(float mass_, PVector location_, PVector velocity_) {
+    mass = mass_;
+    location = location_; // Start all planets aligned for simplicity
     velocity = velocity_;
     acceleration = new PVector(0, 0);
     G = 10;
