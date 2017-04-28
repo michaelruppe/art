@@ -7,4 +7,4 @@
 ![A flow field after a few minutes](/flow_field/screenshot2.png "Flow Field")
 
 ### These are demos built with [Processing](https://processing.org/). You'll have to [download the repo](https://github.com/michaelruppe/Project-Laura) to run them.
-- [solar_system_simple](solar_system_simple/): Simulate a solar system with simple physics engine. Orbital radius is set, and the velocity required for circular orbit is calculated, then randomly tweaked to produce elliptical orbits. Planets are attracted to the sun only, not eachother.
+- [solar_system_simple](solar_system_simple/): Simulate a solar system with simple physics engine. Elliptical orbits made by calculating velocity for circular orbit then randomly tweaking.
