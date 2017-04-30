@@ -6,6 +6,7 @@
 ![A flow field after about half a minute](/flow_field/screenshot.png "Flow Field")
 ![A flow field after a few minutes](/flow_field/screenshot2.png "Flow Field")
 - [Fern](fern): A procedurally generated fractal fern. See [Wiki: Barnsley Fern](https://en.wikipedia.org/wiki/Barnsley_fern)
+![The Barnsley Fern after a few minutes](/fern/Screenshot_1.jpg)
 
 ### These are demos built with [Processing](https://processing.org/). You'll have to [download the repo](https://github.com/michaelruppe/Project-Laura) to run them.
 - [solar_system_simple](solar_system_simple/): Simulate a solar system with simple physics engine. Elliptical orbits made by calculating velocity for circular orbit then randomly tweaking.
