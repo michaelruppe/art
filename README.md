@@ -12,5 +12,5 @@
 
 - ![Rainy Pi](rainy_pi): Count raindrops that fall randomly on a square and a circle with equal "diameter". The ratio of the counts can be used to approximate the value of Pi!
 
-### These are demos built with [Processing](https://processing.org/). You'll have to [download the repo](https://github.com/michaelruppe/Project-Laura) to run them.
+### These are demos built with [Processing](https://processing.org/). You'll have to [download the repo](https://github.com/michaelruppe/Project-Laura/archive/master.zip) to run them.
 - [solar_system_simple](solar_system_simple/): Simulate a solar system with simple physics engine. Elliptical orbits made by calculating velocity for circular orbit then randomly tweaking.
