@@ -24,7 +24,7 @@ function draw() {
 
 	translate(width/2, height/2);
 	stroke(255);
-	fill(100,200,255); 
+	fill(64,224,208); 
 	// Loop through spectrum elements
 	var span = spectrum.length - 1/3 * spectrum.length; // A bit of a hack to cut high frequencies
 	beginShape();
