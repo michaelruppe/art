@@ -13,6 +13,7 @@ function draw() {
 	background(126,192,238); // sky blue
 	
 	for (var j = 0; j < flowers.length; j++ ) {
+		flowers[j].update();
 		flowers[j].show();
 
 	}  
