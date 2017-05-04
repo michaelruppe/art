@@ -1,28 +1,56 @@
 // ToDo: fix flower proportions
 
 function Flower() {
-	this.length = random(40,120);
 	this.pos = createVector(random(width), height);
-	this.flowerPos = this.pos.copy();
+	this.length = random(30,70);
+	this.angle = 0;
+	this.omega = 0;
+	this.domega = 0;
+	this.k = random(0.003,0.012);
+	this.b = random(0.2,0.5);
+	// this.k = 0.01;
+	// this.b = 0.4;
+	
+	this.flowerPos = createVector(0,0);
+	this.flowerPos.x = this.pos.x + ( this.length * sin(this.angle) );
+	this.flowerPos.y = this.pos.y - ( this.length * cos(this.angle) );	
 
+	// Flower proportions and petal rotation
 	this.size = 5;
 	this.theta = random(0,PI/2);
 
-	// Beam characteristics. I studies mechanical engineering, so the best way I know how to make flowers bendy is to model them like steel beams...
-	this.E = 1; // Elastic modulus
-	this.I = 1; // Second moment of area
-	this.load = 0; // The "load" on the "beam" model.
+
+	this.applyForce = function(force) {
+		this.domega += force;
+		this.domega = constrain(this.domega,-0.03,0.03);
+
+	}
 
 	this.update = function() {
-		var defMax = ( this.load * this.length^3 ) / ( 3 * this.E * this.I ); // The maximum deflection of the flower end
-		this.flowerPos = createVector(this.pos.x, this.pos.y - this.length);
+		
+		// Spring and drag
+		this.applyForce( -this.k * this.angle );
+		this.applyForce( -this.b * this.omega );
+
+		// Physics engine
+		this.angle = this.angle + this.omega;
+		this.angle = constrain(this.angle,-PI/2, PI/2);
+		this.omega = this.omega + this.domega;
+		this.domega = 0;
+		// this.omega = constrain(this.omega, -0.1, 0.1);
+
+		this.flowerPos.x = this.pos.x + ( this.length * sin(this.angle) );
+		this.flowerPos.y = this.pos.y - ( this.length * cos(this.angle) );
+
+		pop();
 	}
 
 	this.show = function(){
+
 		
 		// Petals
 		push();
-		translate(this.flowerPos.x, this.flowerPos.y-this.length);
+		translate(this.flowerPos.x, this.flowerPos.y);
 		rotate(this.theta);
 	    stroke(155, 129, 186);
 	    strokeWeight(this.size*1.3);
@@ -38,7 +66,13 @@ function Flower() {
 	    point(0,0);
 
 	    pop();
-	    
+
+
+	    // debug
+	    stroke(255);
+		strokeWeight(3);
+		line(this.pos.x, this.pos.y, this.flowerPos.x, this.flowerPos.y);
+			    
 	}
 
 
