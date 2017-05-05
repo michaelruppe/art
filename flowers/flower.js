@@ -2,15 +2,15 @@
 
 function Flower() {
 	this.pos = createVector(random(width), height);
-	this.length = random(30,70);
+	this.lengthMin = 20;
+	this.lengthMax = 80;
+	this.length = random(this.lengthMin,this.lengthMax);
 	this.angle = 0;
-	this.omega = 0;
-	this.domega = 0;
-	this.k = random(0.003,0.012);
-	this.b = random(0.2,0.5);
-	// this.k = 0.01;
-	// this.b = 0.4;
 	
+	// Make longer flowers more flexible
+	this.flex = (this.length-this.lengthMin) / (this.lengthMax - this.lengthMin);
+	this.flex = map(this.flex, 0, 1, 0.5, 1.5);
+
 	this.flowerPos = createVector(0,0);
 	this.flowerPos.x = this.pos.x + ( this.length * sin(this.angle) );
 	this.flowerPos.y = this.pos.y - ( this.length * cos(this.angle) );	
@@ -19,35 +19,24 @@ function Flower() {
 	this.size = 5;
 	this.theta = random(0,PI/2);
 
+	
 
-	this.applyForce = function(force) {
-		this.domega += force;
-		this.domega = constrain(this.domega,-0.03,0.03);
-
-	}
-
-	this.update = function() {
-		
-		// Spring and drag
-		this.applyForce( -this.k * this.angle );
-		this.applyForce( -this.b * this.omega );
-
-		// Physics engine
-		this.angle = this.angle + this.omega;
-		this.angle = constrain(this.angle,-PI/2, PI/2);
-		this.omega = this.omega + this.domega;
-		this.domega = 0;
-		// this.omega = constrain(this.omega, -0.1, 0.1);
+	this.update = function(wind) {
+		wind = map(wind, -1, 1, -PI/4, PI/4);
+		this.angle = this.flex * wind;
 
 		this.flowerPos.x = this.pos.x + ( this.length * sin(this.angle) );
 		this.flowerPos.y = this.pos.y - ( this.length * cos(this.angle) );
-
-		pop();
 	}
 
 	this.show = function(){
+		// Stem
+		// curve(x1,y1,x1,y1,x2,y2,x3,y3);
+		push();
+		stroke(0,104,56); noFill();
+		curve(this.pos.x,this.pos.y,  this.pos.x,this.pos.y,  this.flowerPos.x,this.flowerPos.y, this.pos.x, this.pos.y-2*this.length);
+		pop();
 
-		
 		// Petals
 		push();
 		translate(this.flowerPos.x, this.flowerPos.y);
@@ -65,14 +54,7 @@ function Flower() {
 	    strokeWeight(this.size);
 	    point(0,0);
 
-	    pop();
-
-
-	    // debug
-	    stroke(255);
-		strokeWeight(3);
-		line(this.pos.x, this.pos.y, this.flowerPos.x, this.flowerPos.y);
-			    
+	    pop();			    
 	}
 
 
