@@ -1,4 +1,5 @@
-var flowers = []
+var flowers = [];
+var bees = [];
 var x;
 var y;
 var fr;
@@ -12,6 +13,10 @@ function setup() {
 
 	for (var i = 0; i < 200; i++ ) {
 		flowers[i] = new Flower();
+	}
+
+	for (var i = 0; i < 1; i++) {
+		bees[i] = new Bee();
 	}
 
 	fr = createP('');
@@ -31,6 +36,10 @@ function draw() {
 	for (var j = 0; j < flowers.length; j++ ) {
 		flowers[j].update(wind);
 		flowers[j].show();
+	}
+
+	for (var i = 0; i < bees.length; i++ ) {
+		bees[i].show();
 	}
 
 	fr.html(floor(frameRate()));

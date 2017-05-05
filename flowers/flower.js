@@ -1,4 +1,4 @@
-// ToDo: fix flower proportions
+// Flowers that flex in the wind and look pretty happy. Perhaps add some different coloured ones!
 
 function Flower() {
 	this.pos = createVector(random(width), height);
@@ -11,13 +11,15 @@ function Flower() {
 	this.flex = (this.length-this.lengthMin) / (this.lengthMax - this.lengthMin);
 	this.flex = map(this.flex, 0, 1, 0.5, 1.5);
 
+	// Underlying flower geometry
 	this.flowerPos = createVector(0,0);
 	this.flowerPos.x = this.pos.x + ( this.length * sin(this.angle) );
 	this.flowerPos.y = this.pos.y - ( this.length * cos(this.angle) );	
 
-	// Flower proportions and petal rotation
+	// Flower proportions and petal appearance
 	this.size = 5;
 	this.theta = random(0,PI/2);
+	this.curvy = random(0.5*this.length, 3*this.length); // Stem curve properties
 
 	
 
@@ -33,8 +35,8 @@ function Flower() {
 		// Stem
 		// curve(x1,y1,x1,y1,x2,y2,x3,y3);
 		push();
-		stroke(0,104,56); noFill();
-		curve(this.pos.x,this.pos.y,  this.pos.x,this.pos.y,  this.flowerPos.x,this.flowerPos.y, this.pos.x, this.pos.y-2*this.length);
+		stroke(0,104,56); strokeWeight(1.3); noFill();
+		curve(this.pos.x,this.pos.y+this.curvy,  this.pos.x,this.pos.y,  this.flowerPos.x,this.flowerPos.y, this.pos.x, this.pos.y-2*this.length);
 		pop();
 
 		// Petals
