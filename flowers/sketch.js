@@ -36,6 +36,9 @@ function draw() {
 	for (var j = 0; j < flowers.length; j++ ) {
 		flowers[j].update(wind);
 		flowers[j].show();
+
+		// Check if a bee is tracking this flower, if so, draw that bee so it's on the same layer
+
 	}
 
 	for (var i = 0; i < bees.length; i++ ) {
