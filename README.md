@@ -1,5 +1,5 @@
 # Project-Laura
-**Code-art project to show my girlfriend beautiful things can be made with math.**
+**Code-art project to show Laura beautiful things can be made with math.**
 
 ### These are demos you can open right from your browser, they're built with javascript (p5.js)
 - [flow field](flow_field): Sprinkles particles onto a slowly changing force vector field. The field is updated with perlin noise and the particles trace their trajectory. It procedurally draws images that look something like this:
