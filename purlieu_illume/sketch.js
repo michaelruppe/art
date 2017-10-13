@@ -1,15 +1,15 @@
 // Grid properties
 var cols = 30
 var rows = 40;
-var scl = 15;
+var scl = 20;
 // Colour properties
-var inc = 0.001;
+var inc = 0.000005;
 var xoff = 0; // Dimension x colour offset
 var yoff = 0; // Dimension y colour offset
 var zoff = 0; // Temporal colour offset (change over time)
 var Roff = 0; // Tone specific offsets so behaviours are decoupled.
-var Goff = 0;
-var Boff = 0;
+var Goff = 100;
+var Boff = 1000;
 
 var src; // the source image and it's dimensions
 var sourceWidth = 420;
@@ -85,9 +85,9 @@ function draw() {
 
       grid[index].increment();
       grid[index].show();
-      yoff += inc;
+      yoff += inc*10;
     }
-    xoff += inc;
+    xoff += inc*10;
   }
   zoff += inc;
 }
@@ -112,11 +112,12 @@ class Dot {
   }
 
   increment(){
+    var mag = 35;
     var temp = [];
     arrayCopy(this.initColour, temp);
-    this.colour[0] = temp[0] + (2*(noise(xoff,yoff,zoff)-1)*20);
-    this.colour[1] = temp[1] + (2*(noise(xoff,yoff,zoff)-1)*20);
-    this.colour[2] = temp[2] + (2*(noise(xoff,yoff,zoff)-1)*20);
+    this.colour[0] = temp[0] + (2*(noise(Roff + xoff, Roff + yoff, Roff + zoff)-1)*mag);
+    this.colour[1] = temp[1] + (2*(noise(Goff + xoff, Goff + yoff, Goff + zoff)-1)*mag);
+    this.colour[2] = temp[2] + (2*(noise(Boff + xoff, Boff + yoff, Boff + zoff)-1)*mag);
 
   }
 
