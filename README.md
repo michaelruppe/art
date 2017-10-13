@@ -4,8 +4,8 @@
 ### These are demos you can open right from your browser, they're built with javascript (p5.js)
 - [flow field](flow_field): Sprinkles particles onto a slowly changing force vector field. The field is updated with perlin noise and the particles trace their trajectory. It procedurally draws images that look something like this:
 
-![A flow field after about half a minute](/flow_field/screenshot.jpg "Flow Field")
-![A flow field after a few minutes](/flow_field/screenshot2.jpg "Flow Field")
+![A flow field after about half a minute](/flow_field/screenshot.jpg)
+![A flow field after a few minutes](/flow_field/screenshot2.jpg)
 
 - [Fern](fern): A procedurally generated fractal fern. See [Wiki: Barnsley Fern](https://en.wikipedia.org/wiki/Barnsley_fern)
 ![The Barnsley Fern after a few minutes](/fern/Screenshot_1.jpg)
