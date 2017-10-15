@@ -103,6 +103,14 @@ class Dot {
     // Must arrayCopy instead of regular assignment, otherwise any assignment to
     // this.colour gets pusehd to this.initColour too! must be how arrays work
     // in p5.js
+    this.scaleNoise = 1e-4; // scale the positions waay down to make difference in noise() output small between adjacent dots
+    this.mover = new Mover(this.colour[0],
+                           this.colour[1],
+                           this.colour[2],
+                           2*noise(x/this.scaleNoise,y/this.scaleNoise,col[0]/this.scaleNoise)-1,
+                           2*noise(x/this.scaleNoise,y/this.scaleNoise,col[2]/this.scaleNoise)-1,
+                           2*noise(x/this.scaleNoise,y/this.scaleNoise,col[2]/this.scaleNoise)-1
+                          );
   }
 
   show() {
@@ -112,12 +120,16 @@ class Dot {
   }
 
   increment(){
-    var mag = 35;
-    var temp = [];
-    arrayCopy(this.initColour, temp);
-    this.colour[0] = temp[0] + (2*(noise(Roff + xoff, Roff + yoff, Roff + zoff)-1)*mag);
-    this.colour[1] = temp[1] + (2*(noise(Goff + xoff, Goff + yoff, Goff + zoff)-1)*mag);
-    this.colour[2] = temp[2] + (2*(noise(Boff + xoff, Boff + yoff, Boff + zoff)-1)*mag);
+    this.mover.update();
+    this.colour[0] = this.mover.r;
+    this.colour[1] = this.mover.g;
+    this.colour[2] = this.mover.b;
+    // var mag = 35;
+    // var temp = [];
+    // arrayCopy(this.initColour, temp);
+    // this.colour[0] = temp[0] + (2*(noise(Roff + xoff, Roff + yoff, Roff + zoff)-1)*mag);
+    // this.colour[1] = temp[1] + (2*(noise(Goff + xoff, Goff + yoff, Goff + zoff)-1)*mag);
+    // this.colour[2] = temp[2] + (2*(noise(Boff + xoff, Boff + yoff, Boff + zoff)-1)*mag);
 
   }
 
@@ -128,4 +140,37 @@ class Dot {
       }
     }
   }
+}
+
+class Mover { // A constant-velocity, 3D particle that moves through colour-space
+  constructor(r,g,b,vr,vg,vb){
+    this.r = r; this.g = g; this.b = b;
+    this.vr = vr; this.vg = vg; this.vb=vb;
+  }
+
+  update() {
+    this.minColVal = 30; //Avoid a dot getting too dark
+    this.r += this.vr;
+    this.g += this.vg;
+    this.b += this.vb;
+    if (this.r >255 ) {
+      this.r=255; this.vr = -this.vr;
+    }
+    if (this.g >255 ) {
+      this.g=255; this.vg = -this.vg;
+    }
+    if (this.b >255 ) {
+      this.b=255; this.vb = -this.vb;
+    }
+    if (this.r <this.minColVal   ) {
+      this.r=this.minColVal; this.vr = -this.vr;
+    }
+    if (this.g <this.minColVal   ) {
+      this.g=this.minColVal; this.vg = -this.vg;
+    }
+    if (this.b <this.minColVal   ) {
+      this.b=this.minColVal; this.vb = -this.vb;
+    }
+  }
+
 }
