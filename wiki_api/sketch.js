@@ -4,10 +4,15 @@
 // A person has made wtf_wikipedia which looks like a very useful wikipedia parser
 // https://github.com/spencermountain/wtf_wikipedia
 
+// TODO use only embedded links on a page instead of performing new searches.
+
 // TODO reconfigure the callback sequence. Willy-nilly callbacks here are dangerous
 // Dan mentions using 'anonymous functions right in the callack at 13:30'
 
 // TODO perhaps stop when it hits "Kevin Bacon" :P
+
+// TODO You can also avoid the CORS error by adding an options parameter to the URL.
+// Set its value to *  (action=opensearch&origin=*&format=json) More info on that can be found at https://www.mediawiki.org/wiki/API:Cross-site_requests﻿
 
 let userInput;
 let searchURL = 'https://en.wikipedia.org/w/api.php?action=opensearch&prop=revisions&rvprop=content&format=json&search='
@@ -43,7 +48,7 @@ function goWiki(term) {
 function gotSearch(data) {
   let len = data[1].length; // number of page titles returned
   let index = floor(random(len)); // select random title
-  var title = data[1][index];
+  let title = data[1][index];
   createP(title);
   //replace spaces with underscores
   title = title.replace(/\s+/g, '_');
@@ -64,8 +69,8 @@ function gotContent(data) {
 
   // Match any sequence of characters, 4 or more words
   let wordRegex = /\b\w{4,}\b/g;
-  var words = content.match(wordRegex);
-  var word = random(words);
+  let words = content.match(wordRegex);
+  let word = random(words);
 
   goWiki(word);
 }
