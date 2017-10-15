@@ -109,6 +109,8 @@ class Dot {
     noStroke();
     fill(this.colour);
     ellipse(this.x, this.y, scl);
+    fill(this.colour[0],this.colour[1],this.colour[2],0);
+    rect(this.x-scl/2, this.y-scl/2, scl,scl);
   }
 
   increment(){
