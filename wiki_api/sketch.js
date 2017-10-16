@@ -23,8 +23,6 @@ let counter = 0;
 function setup() {
   userInput = select('#userinput');
   userInput.changed(startSearch);
-  let term  = userInput.value();
-
 }
 
 
