@@ -1,5 +1,5 @@
 # Project-Laura
-**Code-art project to show Laura beautiful things can be made with math.**
+*Code-art project to show Laura beautiful things can be made with math.*
 
 ### These are demos you can open right from your browser, they're built with javascript (p5.js)
 
