@@ -2,8 +2,10 @@
 **Code-art project to show Laura beautiful things can be made with math.**
 
 ### These are demos you can open right from your browser, they're built with javascript (p5.js)
-- **flow field** ([demo](https://michaelruppe.github.io/Project-Laura/flow_field/index.html)) ([code](flow_field/sketch.js)): Sprinkles particles onto a slowly changing force vector field. The field is updated with perlin noise and the particles trace their trajectory. It procedurally draws images that look something like this:
 
+- **morph** ([demo2](https://michaelruppe.github.io/Project-Laura/morph/02/index.html)) ([demo1](https://michaelruppe.github.io/Project-Laura/morph/01/index.html)): More experiments with `noise()`
+![A screenshot from demo2](/morph/screenshot.png)
+- **flow field** ([demo](https://michaelruppe.github.io/Project-Laura/flow_field/index.html)): Sprinkles particles onto a slowly changing force vector field. The field is updated with perlin noise and the particles trace their trajectory. It procedurally draws images that look something like this:
 ![A flow field after about half a minute](/flow_field/screenshot.jpg)
 ![A flow field after a few minutes](/flow_field/screenshot2.jpg)
 
