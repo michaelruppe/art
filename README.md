@@ -6,7 +6,9 @@
 ### These are demos can run in your browser - they're built with [p5.js](https://p5js.org/)
 
 - **morph**: More experiments with `noise()`
-  - [demo3](https://michaelruppe.github.io/Project-Laura/morph/03/index.html) - the most developed demo. Now with *asymmetry*.
+  - [demo3](https://michaelruppe.github.io/Project-Laura/morph/03/index.html) - In my opinion, the most visually pleasing demo. Now with *asymmetry*.
+  - [demo3](https://michaelruppe.github.io/Project-Laura/morph/03/index.html) - R,G,B entities
+  - [demo4](https://michaelruppe.github.io/Project-Laura/morph/04/index.html) - user-sliders for playing with parameters
   - [demo2](https://michaelruppe.github.io/Project-Laura/morph/02/index.html) - symmetric demo with self-erasing tail to prevent things getting too noisy.
   - [demo1](https://michaelruppe.github.io/Project-Laura/morph/01/index.html) - first attempt.
 
