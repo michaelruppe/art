@@ -4,10 +4,6 @@
 // What is happening in morph/01,02 is that noise takes abs(input)
 
 
-// TODO: Add slider for user-settable parameters
-// inc, size, alpha,
-// xn = r* (noise(x,y,ofs)) * cos(theta); to become
-// xn = r* m*(noise(x,y,ofs)+b) * cos(theta); where m{1:2} and b{-0.5:0}
 
 let numPoints = 400;
 let theta = 0;
