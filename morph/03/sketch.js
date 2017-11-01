@@ -9,7 +9,7 @@
 // xn = r* (noise(x,y,ofs)) * cos(theta); to become
 // xn = r* m*(noise(x,y,ofs)+b) * cos(theta); where m{1:2} and b{-0.5:0}
 
-numPoints = 400;
+let numPoints = 400;
 let theta = 0;
 let r;
 let offset = 0;
@@ -52,7 +52,7 @@ function draw() {
 // Starts with a unit circle and uses points on it as inputs to the noise function
 // the noise then changes the radius of a much larger circle.
 function drawShape(ofs) {
-  beginShape()
+  beginShape();
   for (theta = 0; theta < TWO_PI; theta += (TWO_PI / numPoints) ) {
     // use the unit circle (x,y) points as inputs for the noise function
     let x = 0.5 * cos(theta)+1;
