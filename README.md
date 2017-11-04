@@ -25,3 +25,10 @@
 ### These are demos built with [Processing](https://processing.org/).
 You'll have to download the file/repo to run them.
 - [solar system simple](solar_system_simple/): Simulate a solar system with simple physics engine. Elliptical orbits made by calculating velocity for circular orbit then randomly tweaking.
+
+
+### TODO
+My to-do list of projects to attempt.
+
+ - Sun with many planets generated at same point, but orbital velocity is random, centred around circular.
+ - Steganography
