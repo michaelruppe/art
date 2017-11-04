@@ -2,8 +2,10 @@
 
 let sourceImagePath = "lena-bw.jpg";
 let sourceTextPath = "the-hobbit.txt";
+let srcImg, desImg;
 
 let buffer = [];
+let dBuffer=  [];
 
 let txt, len;
 
@@ -13,15 +15,20 @@ let txt, len;
 
 function preload() {
  srcImg = loadImage(sourceImagePath);
+ desImg = loadImage(sourceImagePath);
  srcTxt = loadStrings(sourceTextPath); // If no linebreaks, all text is put into the single string: srcTxt[0]
 }
 
 function setup() {
-  createCanvas(srcImg.width, srcImg.height);
+  createCanvas(srcImg.width*2, srcImg.height);
+  background(127);
   image(srcImg,0,0); // Display source image
+  srcImg.loadPixels();
+  for (let i = 0; i < 4; i++){
+    console.log(srcImg.pixels[i]);
+  }
 
-
-  // Create array of letters, each letter is an array of binary values
+  // Create array of letters, each letter is an array of 8 bits
   txt = srcTxt.toString();
   len = txt.length;
   for( let i = 0; i < len; i++ ){
@@ -32,8 +39,49 @@ function setup() {
     buffer.push(binaryByte);
   }
 
+  // Encode the source text into the destination image
+  // If the source text would use too many pixels, only loop through number of piels available.
+  // Show the image with text encoded
+  image(desImg, srcImg.width,0);
+  desImg.loadPixels();
+  pixelCount = min( desImg.pixels.length/8, txt.length);
 
-  // Embed the text data into the image data.
+  for ( let i = 0; i < pixelCount; i++){
+    let intDecode = 0;
+    for ( let j = 0; j < 8; j++){
+        let currentPixel = intToBin( desImg.pixels[8*i + j] );
+        // console.log("before "+currentPixel);
+        currentPixel[7] = buffer[i][j]; // Load buffer value into LSB of current pixel
+        // console.log("after "+currentPixel);
+        // console.log(desImg.pixels[8*i+j]);
+        // ARRAY to INT
+        // Take 8-bits and create an integer
+        for (let k = 0; k < 8; k++){
+          intDecode = 0;
+          if (currentPixel[k] == 1) intDecode += pow(2,7-k); // MSB. if it were LSB it would be pow(2,j)
+        }
+        desImg.pixels[8*i+j] = intDecode;
+        // desImg.pixels[8*i+j] = currentPixel;
+    }
+
+  }
+
+  for (let i = 0; i < 4; i++){
+    console.log(desImg.pixels[i]);
+  }
+
+  // Decode the text, and display it
+  for (let i = 0; i < pixelCount; i++){
+    let intDecode = 0;
+    // Take 8-bits and create an integer
+    for (let j = 0; j < 8; j++){
+      let currentPixel = intToBin( desImg.pixels[8*i + j] );
+      if (currentPixel[7] == 1) intDecode += pow(2,7-j); // MSB. if it were LSB it would be pow(2,j)
+    }
+
+    // Convert int to character
+    console.log(char(intDecode));
+  }
 
 
   noLoop();
@@ -71,4 +119,11 @@ function intToBin(int) {
   }
   // console.log(output);
   return(output);
+}
+
+
+// Create an integer from an 8-bit array
+function arrayToInt(array) {
+
+
 }
