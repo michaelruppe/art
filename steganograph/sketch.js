@@ -1,12 +1,13 @@
 // Steganography demo. Hiding text data in an image.
 
 let sourceImagePath = "lena-bw.jpg";
+let preamblePath = "preamble.txt";
 let sourceTextPath = "the-hobbit.txt";
 let srcImg, desImg;
 
 let buffer = [];
 let dBuffer=  [];
-
+let outputText = "";
 let txt, len;
 
 
@@ -16,6 +17,7 @@ let txt, len;
 function preload() {
  srcImg = loadImage(sourceImagePath);
  desImg = loadImage(sourceImagePath);
+ preTxt = loadStrings(preamblePath);
  srcTxt = loadStrings(sourceTextPath); // If no linebreaks, all text is put into the single string: srcTxt[0]
 }
 
@@ -24,9 +26,6 @@ function setup() {
   background(127);
   image(srcImg,0,0); // Display source image
   srcImg.loadPixels();
-  for (let i = 0; i < 4; i++){
-    console.log(srcImg.pixels[i]);
-  }
 
   // Create array of letters, each letter is an array of 8 bits
   txt = srcTxt.toString();
@@ -53,7 +52,7 @@ function setup() {
         // console.log("before "+currentPixel);
         currentPixel[7] = buffer[i][j]; // Load buffer value into LSB of current pixel
         // console.log("after "+currentPixel);
-        // console.log(desImg.pixels[8*i+j]);
+
         // ARRAY to INT
         // Take 8-bits and create an integer
         for (let k = 0; k < 8; k++){
@@ -66,9 +65,6 @@ function setup() {
 
   }
 
-  for (let i = 0; i < 4; i++){
-    console.log(desImg.pixels[i]);
-  }
 
   // Decode the text, and display it
   for (let i = 0; i < pixelCount; i++){
@@ -80,9 +76,11 @@ function setup() {
     }
 
     // Convert int to character
-    console.log(char(intDecode));
+    // console.log(char(intDecode));
+    outputText += char(intDecode);
   }
-
+  createP(preTxt.toString());
+  createP(outputText);
 
   noLoop();
 }
@@ -119,11 +117,4 @@ function intToBin(int) {
   }
   // console.log(output);
   return(output);
-}
-
-
-// Create an integer from an 8-bit array
-function arrayToInt(array) {
-
-
 }

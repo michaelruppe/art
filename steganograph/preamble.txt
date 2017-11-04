@@ -1,0 +1,2 @@
+The image shown on the left is the original, unedited source image.
+The image shown on the right has the following text encoded into it.
