@@ -2,7 +2,7 @@
 
 let sourceImagePath = "lena-bw.jpg";
 let preamblePath = "preamble.txt";
-let sourceTextPath = "the-hobbit.txt";
+let sourceTextPath = "the-hobbit-full.txt";
 let srcImg, desImg;
 
 let buffer = [];
