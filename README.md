@@ -31,4 +31,3 @@ You'll have to download the file/repo to run them.
 My to-do list of projects to attempt.
 
  - Sun with many planets generated at same point, but orbital velocity is random, centred around circular.
- - Steganography

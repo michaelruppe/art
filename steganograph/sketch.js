@@ -18,7 +18,7 @@ function preload() {
  srcImg = loadImage(sourceImagePath);
  desImg = loadImage(sourceImagePath);
  preTxt = loadStrings(preamblePath);
- srcTxt = loadStrings(sourceTextPath); // If no linebreaks, all text is put into the single string: srcTxt[0]
+ srcTxt = loadStrings(sourceTextPath);
 }
 
 function setup() {
@@ -82,10 +82,11 @@ function setup() {
   createP(preTxt.toString());
   createP(outputText);
 
-  noLoop();
 }
 
-
+function draw() {
+  image(desImg, srcImg.width,0); // make sure we're showing the destination image so there's no doubt...
+}
 
 
 
