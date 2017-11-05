@@ -1,16 +1,16 @@
 // Steganography demo. Hiding text data in an image.
 
-let sourceImagePath = "lena-bw.jpg";
-let preamblePath = "preamble.txt";
-let sourceTextPath = "the-hobbit-full.txt";
-let srcImg, desImg;
+const sourceImagePath = "lena-bw.jpg";
+const preamblePath = "preamble.txt";
+const sourceTextPath = "the-hobbit-full.txt";
 
+const charPerPixel = 2; // We can encode one ASCII character in 2 pixels, because we have (R,G,B,A) per pixel to work with.
+let srcImg, desImg;
 let buffer = [];
 let dBuffer=  [];
 let outputText = "";
 let txt, len;
-let encoderBit = 7; // Which bit in the pixel are we going to hide our data?
-
+let encoderBit = 3; // Which bit in the pixel are we going to hide our data?
 
 
 
@@ -43,9 +43,9 @@ function setup() {
   // Show the image with text encoded
   image(desImg, srcImg.width,0);
   desImg.loadPixels();
-  pixelCount = min( desImg.pixels.length/8, txt.length);
+  charCount = min( desImg.pixels.length/charPerPixel, txt.length);
 
-  for ( let i = 0; i < pixelCount; i++){
+  for ( let i = 0; i < charCount; i++){
     for ( let j = 0; j < 8; j++){
         let currentPixel = intToBin( desImg.pixels[8*i + j] );
         // console.log("before "+currentPixel);
@@ -66,7 +66,7 @@ function setup() {
 
 
   // Decode the text, and display it
-  for (let i = 0; i < pixelCount; i++){
+  for (let i = 0; i < charCount; i++){ // Technically cheating by invoking charCount... we wouldn't really know *HOW MUCH* text has been encoded, but it would be trivial to reserve eg. first 32bits to act as a letter counter in the encoded message.
     let intDecode = 0;
     // Take 8-bits and create an integer
     for (let j = 0; j < 8; j++){
