@@ -10,7 +10,7 @@ let buffer = [];
 let dBuffer=  [];
 let outputText = "";
 let txt, len;
-let encoderBit = 3; // Which bit in the pixel are we going to hide our data?
+let encoderBit = 7; // Which bit in the pixel are we going to hide our data? MSB=0, LSB=7
 
 
 
