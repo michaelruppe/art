@@ -30,4 +30,5 @@ You'll have to download the file/repo to run them.
 ### TODO
 My to-do list of projects to attempt.
 
+ - Replicate the particle network effect from [particle.io](https://particle.io)
  - Sun with many planets generated at same point, but orbital velocity is random, centred around circular.
