@@ -1,7 +1,7 @@
 // Emulate the neat particle animation from www.particle.io
 // still pretty primitive
 
-let numParticles = 20;
+let numParticles = 30;
 let bleed = 100; // how big is the bleed off the edge of the canvas
 let particles = [];
 
@@ -20,13 +20,15 @@ function draw() {
 
 	for (let i = particles.length - 1; i >= 0; i--) {
 		particles[i].update(i);		// Update location and position in array
-		particles[i].show();			// Show the particle
 		particles[i].linkup();		// Draw lines between particles
 		particles[i].boundCheck(); // Delete offscreen particles
 	}
+	// Separate loop for show() so that particles are last thing drawn (no over-drawing)
+	for (let i = particles.length - 1; i >= 0; i--) {
+		particles[i].show();			// Show the particle
+	}
 
 	// Replenish particles just offscreen, rather than dumping them in the middle
-	// TODO broken. Only generates particles in the corners.
 	while(particles.length < numParticles) {
 		let bound = 0;
 		// Select which border bleed to generate in
@@ -58,7 +60,7 @@ function draw() {
 
 function Particle(x_, y_) {
 	this.i = 0;
-	this.r = 10;
+	this.r = random(3,8);
 	this.x = x_;
 	this.y = y_;
 	this.v = random(1e-1,2);
@@ -73,10 +75,10 @@ function Particle(x_, y_) {
 	}
 
 	this.show = function() {
-		// noFill();
-		stroke(0,75*(255/162),255);
-		strokeWeight(1);
-		ellipse(this.x, this.y, this.r);
+		fill(0,190,255);
+		noStroke();
+		rectMode(CENTER);
+		rect(this.x, this.y, this.r,this.r);
 	}
 
 	this.linkup = function() {
