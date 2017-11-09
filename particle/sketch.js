@@ -1,7 +1,7 @@
 // Emulate the neat particle animation from www.particle.io
 // still pretty primitive
 
-let numParticles = 15;
+let numParticles = 20;
 let bleed = 100; // how big is the bleed off the edge of the canvas
 let particles = [];
 
@@ -16,7 +16,7 @@ function setup() {
 
 
 function draw() {
-	background(127);
+	background(0,75,162);
 
 	for (let i = particles.length - 1; i >= 0; i--) {
 		particles[i].update(i);		// Update location and position in array
@@ -73,22 +73,26 @@ function Particle(x_, y_) {
 	}
 
 	this.show = function() {
-		noFill();
-		stroke(0,255);
+		// noFill();
+		stroke(0,75*(255/162),255);
 		strokeWeight(1);
 		ellipse(this.x, this.y, this.r);
 	}
 
 	this.linkup = function() {
-		// Draw the lines between particles
-		for (let j = this.i + 1; j < particles.length; j++){
+		// Draw the lines between particles.
+		for (let j = this.i + 1; j < particles.length; j++){ // Draw from jth element to elements after j. Save doubling up the lines.
 			let v1 = createVector(this.x,this.y);
 			let v2 = createVector(particles[j].x, particles[j].y);
 
 			let v3 = v1.copy();
 			v3.sub(v2);
-			let alpha = map(v3.mag(),0,300,255,0, 1);
-			stroke(205,102,204,alpha);
+			let d = constrain(v3.mag(),0,250);
+			let alpha = map(v3.mag(),0,250,255,0, 1);
+			// stroke(205,102,204,alpha); // Pink
+			// stroke(0,alpha);
+			stroke(0,75*(255/162),255,alpha);
+			strokeWeight(3);
 			line(this.x,this.y,particles[j].x,particles[j].y);
 			// console.log(d);
 		}
