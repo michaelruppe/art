@@ -46,7 +46,8 @@ function draw() {
 			x_ = random(width);
 			y_ = height+bleed;
 		}
-		particles.push(new Particle(x_,y_) )
+		particles.push(new Particle(x_,y_) );
+		pop();
 	}
 
 }
@@ -56,11 +57,11 @@ function draw() {
 
 
 function Particle(x_, y_) {
-	this.i;
+	this.i = 0;
 	this.r = 10;
 	this.x = x_;
 	this.y = y_;
-	this.v = random(1e-1,4);
+	this.v = random(1e-1,2);
 	this.theta = random(TWO_PI);
 	this.vx = this.v * cos(this.theta);
 	this.vy = this.v * sin(this.theta);
@@ -79,11 +80,17 @@ function Particle(x_, y_) {
 	}
 
 	this.linkup = function() {
-		for (let j = this.i+1; j < particles.length; j++){
-			let d = sqrt( (this.x + particles[j].x)^2 + (this.y + particles[j].y)^2 );
-			strokeWeight(1);
-			stroke(0,50);
+		// Draw the lines between particles
+		for (let j = this.i + 1; j < particles.length; j++){
+			let v1 = createVector(this.x,this.y);
+			let v2 = createVector(particles[j].x, particles[j].y);
+
+			let v3 = v1.copy();
+			v3.sub(v2);
+			let alpha = map(v3.mag(),0,300,255,0, 1);
+			stroke(205,102,204,alpha);
 			line(this.x,this.y,particles[j].x,particles[j].y);
+			// console.log(d);
 		}
 	}
 
