@@ -17,6 +17,8 @@
 ![A flow field after about half a minute](/flow_field/screenshot.jpg)
 ![A flow field after a few minutes](/flow_field/screenshot2.jpg)
 
+- **particle** ([demo](https://michaelruppe.github.io/Project-Laura/particle/index.html)): An attempt at re-creating the beautiful background animation present on [particle.io](https://particle.io).
+
 - **fern** ([demo](https://michaelruppe.github.io/Project-Laura/fern/index.html)): A procedurally generated fractal fern. See [Wiki: Barnsley Fern](https://en.wikipedia.org/wiki/Barnsley_fern)
 ![The Barnsley Fern after a few minutes](/fern/Screenshot_1.jpg)
 
@@ -30,5 +32,4 @@ You'll have to download the file/repo to run them.
 ### TODO
 My to-do list of projects to attempt.
 
- - Replicate the particle network effect from [particle.io](https://particle.io)
  - Sun with many planets generated at same point, but orbital velocity is random, centred around circular.
