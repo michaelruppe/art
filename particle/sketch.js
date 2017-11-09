@@ -1,5 +1,5 @@
 // Emulate the neat particle animation from www.particle.io
-// still pretty primitive
+// Probably 80% of the way there - all that remains are the artistic colours and tuning.
 
 let numParticles = 30;
 let bleed = 100; // how big is the bleed off the edge of the canvas
