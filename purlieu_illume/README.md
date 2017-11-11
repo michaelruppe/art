@@ -2,7 +2,7 @@ This project is based off a work by Matthew Johnson called "Purlieu Illume (Phar
 I saw it at the Counihan Gallery in Brunswick, VIC.
 I knew that I wanted to do something with it, so I took the gallery's brochure back to Newcastle - it featured a half-page print of the work.
 
-I scanned in the image, applied the following blur to remove dithering from the print process, and created this script.
+I scanned in the image, applied the following blur to remove dithering from the print process, and created this small project. The original work is used as the initial conditions, and a noise function alters the colours of the dots.
 
 
 ```
