@@ -89,8 +89,8 @@ function Particle(x_, y_) {
 
 			let v3 = v1.copy();
 			v3.sub(v2);
-			let d = constrain(v3.mag(),0,250);
-			let alpha = map(v3.mag(),0,250,255,0, 1);
+			let d = constrain(v3.mag(),20,250);
+			let alpha = map(v3.mag(),0,250,255,20, 1);
 			// stroke(205,102,204,alpha); // Pink
 			// stroke(0,alpha);
 			stroke(0,75*(255/162),255,alpha);
