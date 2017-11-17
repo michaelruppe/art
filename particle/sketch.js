@@ -1,12 +1,12 @@
 // Emulate the neat particle animation from www.particle.io
 // Probably 80% of the way there - all that remains are the artistic colours and tuning.
 
-let numParticles = 30;
+let numParticles = 40;
 let bleed = 100; // how big is the bleed off the edge of the canvas
 let particles = [];
 
 function setup() {
-	createCanvas(800,800);
+	createCanvas(windowWidth,windowHeight);
 
 	for (let i = 0; i<numParticles; i++){
 		particles[i] = new Particle(random(width), random(height));
@@ -16,8 +16,9 @@ function setup() {
 
 
 function draw() {
-	background(0,75,162);
-
+	console.log(frameRate());
+	// background(0,75,162);
+	background(0);
 	for (let i = particles.length - 1; i >= 0; i--) {
 		particles[i].update(i);		// Update location and position in array
 		particles[i].linkup();		// Draw lines between particles
@@ -76,6 +77,7 @@ function Particle(x_, y_) {
 
 	this.show = function() {
 		fill(0,190,255);
+		fill(255);
 		noStroke();
 		rectMode(CENTER);
 		rect(this.x, this.y, this.r,this.r);
@@ -93,7 +95,8 @@ function Particle(x_, y_) {
 			let alpha = map(v3.mag(),0,250,255,20, 1);
 			// stroke(205,102,204,alpha); // Pink
 			// stroke(0,alpha);
-			stroke(0,75*(255/162),255,alpha);
+			// stroke(0,75*(255/162),255,alpha);
+			stroke(255,alpha);
 			strokeWeight(3);
 			line(this.x,this.y,particles[j].x,particles[j].y);
 			// console.log(d);
