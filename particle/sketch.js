@@ -4,10 +4,10 @@
 let numParticles = 40;
 let bleed = 100; // how big is the bleed off the edge of the canvas
 let particles = [];
+let dmax = 250;
 
 function setup() {
 	createCanvas(windowWidth,windowHeight);
-
 	for (let i = 0; i<numParticles; i++){
 		particles[i] = new Particle(random(width), random(height));
 	}
@@ -91,15 +91,18 @@ function Particle(x_, y_) {
 
 			let v3 = v1.copy();
 			v3.sub(v2);
-			let d = constrain(v3.mag(),20,250);
-			let alpha = map(v3.mag(),0,250,255,20, 1);
-			// stroke(205,102,204,alpha); // Pink
-			// stroke(0,alpha);
-			// stroke(0,75*(255/162),255,alpha);
-			stroke(255,alpha);
-			strokeWeight(3);
-			line(this.x,this.y,particles[j].x,particles[j].y);
-			// console.log(d);
+			let d = v3.mag(); // Minimise calls to mag() by saving in variable.
+			if (d <= dmax) { // save some cycles - don't bother doing calculations if distance is too great anyway.
+				d = constrain(d,20,dmax);
+				let alpha = map(d,0,dmax,255,20, 1);
+				// stroke(205,102,204,alpha); // Pink
+				// stroke(0,alpha);
+				// stroke(0,75*(255/162),255,alpha);
+				stroke(255,alpha);
+				strokeWeight(3);
+				line(this.x,this.y,particles[j].x,particles[j].y);
+				// console.log(d);
+			}
 		}
 	}
 
