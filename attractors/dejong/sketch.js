@@ -1,17 +1,32 @@
 // Attractor structure and constants from
 // http://www.complexification.net/gallery/machines/peterdejong/
+let a,b,c,d;
+// Jong's constants
+// a = -0.89567065;
+// b = 1.5909586;
+// c = 1.8515863;
+// d = 2.1974306;
 
-let a = -0.89567065;
-let b = 1.5909586;
-let c = 1.8515863;
-let d = 2.1974306;
+// my own
+a = 2.89567065;
+b = 1.5909586;
+c = 1.8515863;
+d = 2.1974306;
+
+// another
+a = 1.1;
+b = 1;
+c = 1.8515863;
+d = 2.1974306;
+
+
 
 let scl = 200;
 
 let x = 0;
 let y = 0;
 
-let bufferLen = 5e5;
+let bufferLen = 2e5;
 
 function setup() {
 	createCanvas(900,900);
