@@ -8,7 +8,7 @@ function setup() {
 	createCanvas(windowWidth, windowHeight);
 	translate(width/2, height/2);
 	background(255);
-	strokeWeight(2);
+	strokeWeight(3);
 	stroke(0);
 
 	r = min(width,height)/100;
