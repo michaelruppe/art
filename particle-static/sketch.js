@@ -3,14 +3,16 @@ const DOB = 250892;
 let bleed = 150; // how big is the bleed off the edge of the canvas
 let particles = [];
 let dmax = 120;
-let numBenches = 7;
+let numBenches = 5;
 let particlesPerBench = 120;
 let numParticles = numBenches * particlesPerBench;
 let benchRatio = 1.1; // Leave
 let benchWidth;
 
 function setup() {
-	createCanvas(1600,2000);
+	benchWidth =  dmax*2.5;
+	height_ = benchWidth * numBenches;
+	createCanvas(1600,height_);
 	background(249,139,136);
 	noiseSeed(DOB);
 	randomSeed(DOB);
@@ -21,7 +23,6 @@ function setup() {
 		let centreOfBench = height*(bench)/(numBenches +1 )- benchWidth/2;
 		for (let i = 0; i < particlesPerBench; i++){
 			let x = random(bleed, width-bleed);
-			// let y = random(centreOfBench - benchRatio*height/numBenches, centreOfBench + benchRatio*height/numBenches);
 			let y = centreOfBench + benchWidth*noise(0.03*x, bench);
 			particles.push(new Particle(x, y));
 
