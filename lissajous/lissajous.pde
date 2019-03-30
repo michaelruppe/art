@@ -31,8 +31,8 @@ void draw() {
     // find the centre of ith circle and draw that circle
     float cx = w + i*w + w/2;
     float cy = w/2;
-    stroke(255); 
-    strokeWeight(2); 
+    stroke(255);
+    strokeWeight(2);
     noFill();
 
     ellipse(cx, cy, d, d);
@@ -40,10 +40,10 @@ void draw() {
     // draw the point which tracks the angle
     float x = r * cos(angle * (i+1) - HALF_PI);
     float y = r * sin(angle * (i+1) - HALF_PI);
-    stroke(255); 
+    stroke(255);
     strokeWeight(8);
     point(cx+x, cy+y);
-    stroke(255, 100); 
+    stroke(255, 100);
     strokeWeight(2);
     line(cx + x, cy+y, cx+x, height);
 
@@ -56,8 +56,8 @@ void draw() {
     // find the centre of ith circle and draw that circle
     float cx = w/2;
     float cy = w + j*w + w/2;
-    stroke(255); 
-    strokeWeight(2); 
+    stroke(255);
+    strokeWeight(2);
     noFill();
 
     ellipse(cx, cy, d, d);
@@ -65,10 +65,10 @@ void draw() {
     // draw the point which tracks the angle
     float x = r * cos(angle * (j+1) - HALF_PI);
     float y = r * sin(angle * (j+1) - HALF_PI);
-    stroke(255); 
+    stroke(255);
     strokeWeight(8);
     point(cx+x, cy+y);
-    stroke(255, 100); 
+    stroke(255, 100);
     strokeWeight(2);
     line(cx + x, cy+y, width, cy+y);
 
@@ -84,7 +84,7 @@ void draw() {
       if (angle > -TWO_PI) { // Don't save points that we don't need to. save limited frames
         curves[j][i].addPoint();
         curves[j][i].showPath();
-        //if (frameNum % 3 == 0) saveFrame("line-######.jpg");
+        //if (frameNum % 3 == 0) saveFrame("frames/line-######.jpg");
       } else {
         curves[j][i].showPath();
       }
