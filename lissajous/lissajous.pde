@@ -2,6 +2,7 @@ float angle = 0;
 int w = 80;  // width of the circle 'footprint'?
 int rows;
 int cols;
+int frameNum = 0;
 Curve[][] curves;
 
 
@@ -80,14 +81,15 @@ void draw() {
   // save the co-ordinates for every curve and display them
   for (int i = 0; i < cols; i++) {
     for (int j = 0; j < rows; j++) {
-      if (angle > -TWO_PI) { // Don't save points that we don't need to.
+      if (angle > -TWO_PI) { // Don't save points that we don't need to. save limited frames
         curves[j][i].addPoint();
         curves[j][i].showPath();
-        //saveFrame("line-######.jpg");
+        //if (frameNum % 3 == 0) saveFrame("line-######.jpg");
       } else {
         curves[j][i].showPath();
       }
     }
   }
   angle -= 0.01;
+  frameNum++;
 }
