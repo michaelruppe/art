@@ -1,3 +1,5 @@
+// very much an experiment at this point.
+
 let curves;
 
 
@@ -42,23 +44,12 @@ class Squig {
 
 
   add() {
-    // Select an angle from 1 of 8 directions
+    // Select an angle from 1 of 8 directions. TODO: make sure we don't go back the way we came eg. don't select 0 if the last angle was PI
     let anglePool = [0, PI/4, HALF_PI, 3*PI/4, PI, 5*PI/4, 3*HALF_PI, 7*PI/4];
 
-    // let ang = this.rAngle();
     let p1 = this.segments[this.segments.length-1].copy();
-    // console.log(p1);
+
     let maxLen = 60;
-    //find bound in that angle's direction
-    // if (ang == 0) {
-    //   maxLen = abs(this.bound - this.p1.x);
-    // } else if (ang == HALF_PI) {
-    //   maxLen = abs(this.p1.y);
-    // } else if (ang == 3*HALF_PI) {
-    //   maxLen = abs(this.p1.x);
-    // } else {
-    //   maxLen = abs(this.bound - this.p1.y);
-    // }
 
     let ang = random(anglePool);
     let len = random(0.2*maxLen, maxLen);
@@ -72,23 +63,6 @@ class Squig {
 
 
 
-  }
-
-  // Return a random, 45degree angle
-  rAngle() {
-    return random(0, TWO_PI);
-    let n = random(1);
-    let oldAng = this.angles[this.angles.length-1];
-    // don't go back the way you came
-    if (n <= 0.25 && oldAng != PI) {
-      return 0;
-    } else if (n <= 0.5 && oldAng != 3*HALF_PI) {
-      return HALF_PI;
-    } else if (n <= 0.75 && oldAng != 0) {
-      return PI;
-    } else {
-      return 3*HALF_PI;
-    }
   }
 
 
