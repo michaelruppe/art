@@ -1,27 +1,44 @@
 // very much an experiment at this point.
 
-let curves;
-
+let curves = [];
+let cols = 10;
+let rows = 10;
+let resx, resy;
 
 function setup() {
-  createCanvas(800,800);
+  let canvas = createCanvas(800,800);
+  canvas.parent('sketch-holder');
 
+  resx = width / cols;
+  resy = height / rows;
 
-  curves = new Squig(createVector(0,0),50,80);
+  for (let i = 0; i < rows; i++) {
+    curves[i] = [];
+    for (let j = 0; j < cols; j++) {
+      curves[i].push(new Squig(createVector(j*resy,i*resx),resx,resy));
 
-  for (let i = 0; i < 10; i++) {
-    curves.add();
+      for (let z = 0; z < 4; z++) {
+        curves[i][j].add();
+      }
+
+    }
   }
+
+
 
 
 }
 
 function draw() {
-  translate(width/2, height/2);
   background(120);
 
-  for (let i = 0; i < curves.num; i++) {
-    curves.show();
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+
+        curves[i][j].show();
+
+
+    }
   }
 }
 
