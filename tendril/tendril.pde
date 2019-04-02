@@ -1,5 +1,9 @@
-// Create some nice plasma tendril vibes.
-// Trying my hand at coding an effect found at: https://necessarydisorder.wordpress.com/2017/11/15/drawing-from-noise-and-then-making-animated-loopy-gifs-from-there/
+/*
+ * Create some nice plasma tendril vibes.
+ * Change the characteristics by altering the s, r, and mag constants in the field() function
+ * Trying my hand at coding an effect found at: https://necessarydisorder.wordpress.com/2017/11/15/drawing-from-noise-and-then-making-animated-loopy-gifs-from-there/
+ *
+ */
 
 final int trajLength = 200;   // Length of each trajectory from starting point. Higher means longer tendrils
 final int totalFrames = 100;  // Number of frames to record
@@ -11,7 +15,7 @@ OpenSimplexNoise noiseOS;
 
 void setup() {
   size(600, 600);
-  noiseOS = new OpenSimplexNoise(random(1,100));
+  noiseOS = new OpenSimplexNoise((int) random(1,1000));
   background(0);
 }
 
@@ -57,9 +61,9 @@ void draw() {
 
 PVector field(float x, float y, int totalFrameNum) {
 
-  final float s = 0.03;  // Scale for noise-change from one ordinate point to the next.
+  final float s = 0.02;  // Scale for noise-change from one ordinate point to the next.
   final float r = 0.3;   // Radius of noise space
-  final float mag = 2.0; // Scaling constant
+  final float mag = 4.0; // Scaling constant
 
   float prog = TWO_PI * (frameCount - 1) / totalFrameNum; // Animation progress 0 -> 1, converted to revolutions
   float sx = s*x;
