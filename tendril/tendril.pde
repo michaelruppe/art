@@ -61,9 +61,9 @@ void draw() {
 
 PVector field(float x, float y, int totalFrameNum) {
 
-  final float s = 0.02;  // Scale for noise-change from one ordinate point to the next.
-  final float r = 0.3;   // Radius of noise space
-  final float mag = 4.0; // Scaling constant
+  final float s = 0.03;  // Scale for noise-change from one ordinate point to the next.
+  final float r = 0.2;   // Radius of noise space
+  final float mag = 2.0; // Scaling constant
 
   float prog = TWO_PI * (frameCount - 1) / totalFrameNum; // Animation progress 0 -> 1, converted to revolutions
   float sx = s*x;
