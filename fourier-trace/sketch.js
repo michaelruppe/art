@@ -16,7 +16,7 @@ let path = [];
 let userPath = [];
 
 function setup() {
-  createCanvas(600,400);
+  createCanvas(windowWidth,windowHeight);
 
 }
 
@@ -25,6 +25,14 @@ function setup() {
 
 function draw() {
   background(0);
+
+  // display nice text when no path
+  if (fourierX.length == 0) {
+    noStroke(); fill(255,100);
+    textSize(40); textAlign(CENTER)
+    text("Draw Something",width/2,height/2);
+
+  }
 
   // Draw the user-path
   if (userPath.length > 0) {
@@ -46,20 +54,14 @@ function draw() {
     let v = createVector(vx.x, vy.y);
     path.unshift(v);
 
-
-    stroke(255,75);
-    line(vx.x,vx.y,v.x,v.y);
-    line(vy.x,vy.y,v.x,v.y);
-
+    // The Path
     beginShape(); stroke(255); noFill();
     for (let i = 0; i < path.length; i++){
       vertex(path[i].x,path[i].y);
     }
     endShape();
+    ellipse(path[0].x,path[0].y, 10,10)
     pop();
-
-
-
 
     const dt = TWO_PI / fourierY.length;
     time += dt;
@@ -84,9 +86,9 @@ function epicycles(x,y,rotation, fourier) {
     x += radius * cos(freq * time + phase + rotation);
     y += radius * sin(freq * time + phase + rotation);
 
-    stroke(255,100); noFill();
+    stroke(255,50); noFill();
     ellipse(prevx, prevy, radius * 2);
-    stroke(255);
+    stroke(255,150);
     line(prevx, prevy, x, y);
   }
   return createVector(x,y);
@@ -120,4 +122,9 @@ function mouseReleased() {
   fourierX = dft(x);
   fourierY = dft(y);
   userPath = [];
+}
+
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }
