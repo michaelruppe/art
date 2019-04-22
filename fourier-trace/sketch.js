@@ -7,14 +7,14 @@ let path = [];
 
 function setup() {
   createCanvas(600,400);
-  for (let i = 0; i < 300; i++) {
-    angle = map(i,0,500,0,TWO_PI)
-    x[i] = 150*noise(angle*i/50);
-    y[i] = 150*noise(angle*i/50 + 1000);
-  }
-
-  fourierX = dft(x);
-  fourierY = dft(y);
+  // for (let i = 0; i < 20; i++) {
+  //   angle = map(i,0,50,0,TWO_PI)
+  //   x[i] = 150*noise(angle*i/50);
+  //   y[i] = 150*noise(angle*i/50 + 1000);
+  // }
+  //
+  // fourierX = dft(x);
+  // fourierY = dft(y);
 }
 
 function epicycles(x,y,rotation, fourier) {
@@ -40,7 +40,7 @@ function epicycles(x,y,rotation, fourier) {
 
 function draw() {
   background(0);
-
+if (fourierX) {
   let vx = epicycles(300,80, 0, fourierX);
   let vy = epicycles(70, 0.6*height, HALF_PI, fourierY);
   let v = createVector(vx.x, vy.y);
@@ -67,4 +67,25 @@ function draw() {
     path.pop();
   }
 
+}
+
+}
+
+// reset path on mouse press
+function mousePressed() {
+  x= [];
+  y = [];
+}
+
+// generate path
+function mouseDragged() {
+  x.push(mouseX);
+  y.push(mouseY);
+
+}
+
+function mouseReleased() {
+
+  fourierX = dft(x);
+  fourierY = dft(y);
 }
