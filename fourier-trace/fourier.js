@@ -1,8 +1,7 @@
 function dft(x) {
   // Useful links:
   // https://www.algorithm-archive.org/contents/cooley_tukey/cooley_tukey.html
-  // TODO: find the FFT formula on wiki so following notation fits
-  // could also do this operation with a PVector
+
 
 
 
