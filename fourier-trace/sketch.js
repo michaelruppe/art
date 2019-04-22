@@ -15,9 +15,17 @@ let time = 0;
 let path = [];
 let userPath = [];
 
+let helpButton;
+let helpState = false;  // show the help text or not
+let canReset = true;   // enables and disables clearing of the screen
+
 function setup() {
   createCanvas(windowWidth,windowHeight);
-
+  helpButton = createButton('?');
+  helpButton.position(0.95*width, 0.95*height);
+  helpButton.mousePressed(showHelp);
+  helpButton.mouseOver(disableReset);
+  helpButton.mouseOut(enableReset);
 }
 
 
@@ -72,6 +80,20 @@ function draw() {
 
   }
 
+
+  // Help Text
+  if (helpState) {
+
+    noStroke(); fill(75,0,130, 50);
+    rectMode(CENTER);
+    rect(width/2,height/2,0.8*width,0.8*height);
+    noStroke(); fill(255)
+    str = "The line you draw is re-created using Epicycles: circles whose centres move around the circumference of a larger one.\nBy stacking many of these epicycles with different sizes and rotation speeds, you can reconstruct any line"
+    textSize(16)
+    text(str, width/2, height/2, 0.6*width, 0.6*height);
+
+  }
+
 }
 
 
@@ -98,12 +120,14 @@ function epicycles(x,y,rotation, fourier) {
 
 // reset everything on mouse-press
 function mousePressed() {
-  x = [];
-  y = [];
-  fourierX = [];
-  fourierY = [];
-  path = [];
-  time = 0;
+  if (canReset) {
+    x = [];
+    y = [];
+    fourierX = [];
+    fourierY = [];
+    path = [];
+    time = 0;
+  }
 }
 
 // generate path while dragging
@@ -127,4 +151,16 @@ function mouseReleased() {
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
+}
+
+function showHelp() {
+  helpState = !helpState;
+}
+
+function disableReset() {
+  canReset = false;
+}
+
+function enableReset() {
+  canReset = true;
 }
