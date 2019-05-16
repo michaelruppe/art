@@ -1,11 +1,13 @@
-// Drawing with Epicycles and the Discrete Fourier Transform
-// Michael Ruppe
-// April 2019
-//
-// Accept a user drawing, saving the coordinates
-// treat the coordinates as a 'signal' to perform DFT on
-// generate epicycles from DFT analysis
-// redraw the input using epicycles
+/*******************************************************************************
+ * Fourier Trace - Drawing with Epicycles and the Discrete Fourier Transform
+ * Michael Ruppe
+ * April 2019
+ *
+ * Accept a user drawing, saving the coordinates
+ * treat the coordinates as a 'signal' to perform DFT on
+ * generate epicycles from DFT analysis
+ * redraw the input using epicycles
+ ******************************************************************************/
 
 let x = [];
 let y = [];
