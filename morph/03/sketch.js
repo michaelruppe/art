@@ -1,8 +1,10 @@
-// Removed the symmetry!
-// This one had me puzzled until I realised the reference (unit circle) had
-// to be moved so that x,y >= 0
-// What is happening in morph/01,02 is that noise takes abs(input)
-
+/*******************************************************************************
+ * Morph
+ * Michael Ruppe
+ *
+ * Demonstrates 3D noise. Two dimensions close a circle without discontinuities
+ * and the third to animate over time.
+ ******************************************************************************/
 
 
 let numPoints = 400;
@@ -17,7 +19,8 @@ let size = 400;
 let alpha = 24;
 
 function setup() {
-  createCanvas(600,600);
+  let canvas = createCanvas(600,600);
+  canvas.parent('sketch-holder');
   background(255);
   r = width/2;
 }
