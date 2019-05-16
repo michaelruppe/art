@@ -20,7 +20,7 @@ function setup() {
     for (let j = 0; j < cols; j++) {
       let angle = noise(0.1 * i, 0.1 * j, zoff) * TWO_PI;
       squares[i].push(new Square(size*j, size*i, angle, size));
-      squares[i][j].col = color(random(rubiks));
+      // squares[i][j].col = color(random(rubiks));
 
     }
   }
@@ -28,7 +28,7 @@ function setup() {
 }
 
 function draw() {
-  background(255);
+  background(127);
   zoff += 0.01;
 
   let from = color(255, 0, 0, 0.3 * 255);
