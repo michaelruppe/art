@@ -1,14 +1,24 @@
-// Emulate the neat particle animation from www.particle.io
-// Probably 80% of the way there - all that remains are the artistic colours and tuning.
+/*******************************************************************************
+ * Particle - Emulate a popular stock-background effect
+ * Michael Ruppe
+ *
+ * Probably 80% of the way there - all that remains are the artistic colours
+ * and tuning.
+ ******************************************************************************/
 
-let numParticles = 40;
+let numParticles;
 let bleed = 100; // how big is the bleed off the edge of the canvas
 let particles = [];
-let dmax = 250;
+let dmax = 250;  // maximum distance to draw links
 
 function setup() {
-	createCanvas(windowWidth,windowHeight);
-	for (let i = 0; i<numParticles; i++){
+	let canvas = createCanvas(windowWidth,windowHeight);
+	canvas.parent('sketch-holder');
+
+	// Create some particles based on screen size and desired density
+	const particleDensity = 60 / (1920*1080); // Particles per unit-screen-area
+	numParticles = (width*height) * particleDensity;
+	for (let i = 0; i < numParticles; i++){
 		particles[i] = new Particle(random(width), random(height));
 	}
 
@@ -17,8 +27,7 @@ function setup() {
 
 function draw() {
 	console.log(frameRate());
-	// background(0,75,162);
-	background(0);
+	background(color('#2C001E')); // Aubergine
 	for (let i = particles.length - 1; i >= 0; i--) {
 		particles[i].update(i);		// Update location and position in array
 		particles[i].linkup();		// Draw lines between particles
