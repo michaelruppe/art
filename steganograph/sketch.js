@@ -1,7 +1,6 @@
 // Steganography demo. Hiding text data in an image.
 
 const sourceImagePath = "lena-bw.jpg";
-const preamblePath = "preamble.txt";
 const sourceTextPath = "the-hobbit-full.txt";
 
 const charPerPixel = 2; // We can encode one ASCII character in 2 pixels, because we have (R,G,B,A) per pixel to work with.
@@ -17,7 +16,6 @@ let encoderBit = 7; // Which bit in the pixel are we going to hide our data? MSB
 function preload() {
  srcImg = loadImage(sourceImagePath);
  desImg = loadImage(sourceImagePath);
- preTxt = loadStrings(preamblePath);
  srcTxt = loadStrings(sourceTextPath);
 }
 
@@ -79,7 +77,6 @@ function setup() {
     // console.log(char(intDecode));
     outputText += char(intDecode);
   }
-  createP(preTxt.toString());
   createP(outputText);
 
 
