@@ -22,7 +22,8 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(srcImg.width*2, srcImg.height);
+  let canvas = createCanvas(srcImg.width*2, srcImg.height);
+  canvas.parent('sketch-holder');
   background(127);
   image(srcImg,0,0); // Display source image
   srcImg.loadPixels();
