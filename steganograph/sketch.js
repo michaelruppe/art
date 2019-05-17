@@ -20,9 +20,9 @@ function preload() {
 }
 
 function setup() {
-  let canvas = createCanvas(srcImg.width*2, srcImg.height);
+  let canvas = createCanvas(srcImg.width*2 + 10, srcImg.height);
   canvas.parent('sketch-holder');
-  background(127);
+  background(255);
   image(srcImg,0,0); // Display source image
   srcImg.loadPixels();
 
@@ -40,7 +40,7 @@ function setup() {
   // Encode the source text into the destination image
   // If the source text would use too many pixels, only loop through number of pixels available.
   // Show the image with text encoded
-  image(desImg, srcImg.width,0);
+  image(desImg, srcImg.width+10,0);
   desImg.loadPixels();
   charCount = min( desImg.pixels.length/charPerPixel, txt.length);
 
@@ -79,19 +79,16 @@ function setup() {
   }
   createP(outputText);
 
-
-
-
-}
-
-function draw() {
-  // background(127);
-  image(desImg, srcImg.width,0); // make sure we're showing the destination image so there's no doubt...
+  image(desImg, srcImg.width+10,0); // make sure we're showing the destination image so there's no doubt...
   desImg.updatePixels();
+
+
+  fill(0); stroke(255); strokeWeight(5); textSize(28);
+  text('Input', 15, 30);
+  text('Output', srcImg.width + 25, 30);
+
+  noLoop();
 }
-
-
-
 
 
 
