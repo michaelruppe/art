@@ -12,14 +12,14 @@ let particles = [];
 let dmax = 250;  // maximum distance to draw links
 
 function setup() {
-	let canvas = createCanvas(windowWidth,windowHeight);
+	let canvas = createCanvas(600, 600);
 	canvas.parent('sketch-holder');
 
 	// Create some particles based on screen size and desired density
-	const particleDensity = 60 / (1920*1080); // Particles per unit-screen-area
+	const particleDensity = 100 / (1920*1080); // Particles per unit-screen-area
 	numParticles = (width*height) * particleDensity;
 	for (let i = 0; i < numParticles; i++){
-		particles[i] = new Particle(random(width), random(height));
+		particles[i] = new Particle(random(-bleed, width+bleed), random(-bleed, height+bleed));
 	}
 
 }
@@ -70,11 +70,15 @@ function draw() {
 
 function Particle(x_, y_) {
 	this.i = 0;
-	this.r = random(3,8);
+	this.r = random(2,5);
 	this.x = x_;
 	this.y = y_;
-	this.v = random(1e-1,2);
-	this.theta = random(TWO_PI);
+	this.v = random(1e-1,8e-1);
+	// Initial direction: towards centre of canvas
+	let rcx = width/2 - this.x;
+	let rcy = height/2 - this.y;
+	this.theta = atan2(rcy, rcx);
+	this.theta += random(-0.8*HALF_PI, 0.8*HALF_PI); // Modify direction
 	this.vx = this.v * cos(this.theta);
 	this.vy = this.v * sin(this.theta);
 
@@ -108,7 +112,7 @@ function Particle(x_, y_) {
 				// stroke(0,alpha);
 				// stroke(0,75*(255/162),255,alpha);
 				stroke(255,alpha);
-				strokeWeight(3);
+				strokeWeight(1);
 				line(this.x,this.y,particles[j].x,particles[j].y);
 				// console.log(d);
 			}
