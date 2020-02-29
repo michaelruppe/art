@@ -2,7 +2,7 @@
  * Firefly -  Flickering fireflies will attempt to synchronise with their
  *            neightbours.
  * Michael Ruppe
- * April 2019
+ *
  *
  * The fireflies flicker for now, but I haven't implemented the synchronisation
  * behaviour - fireflies should be influenced by their neightbours' behaviour.
