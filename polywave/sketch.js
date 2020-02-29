@@ -25,7 +25,7 @@ function draw() {
   let x = 0, y=0;
   background(0);
   stroke(255); noFill();
-  for (let y = 0; y < rows; y+=2){
+  for (let y = 0; y < rows; y++){
     beginShape(TRIANGLE_STRIP);
     for (let x = 0; x < cols; x++){
       // rect(x*scl,y*scl,scl,scl);
