@@ -30,8 +30,10 @@ You'll have to download the file/repo to run them.
 
 
 ### TODO
-My to-do list of projects to attempt.
-
+Projects to attempt or further experiment with
+ - Animage perf
+ - polywave: animate
+ - finish firefly
  - Sun with many planets generated at same point, but orbital velocity is random, centred around circular.
  - nested, fixed orbits. path tracing
  - shape division
