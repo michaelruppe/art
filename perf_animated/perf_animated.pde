@@ -42,10 +42,10 @@ void draw() {
 
       if (chance > 0.4) {
         // Shimmery pattern
-        //float r = random(res/3, res) * noise(xoff,yoff,zoff);
+        float r = random(res/3, res) * noise(xoff,yoff,zoff);
         
         // Islands
-        float r = res* (noise(xoff,yoff,zoff))*1.3;
+        //float r = res* (noise(xoff,yoff,zoff))*1.3;
         ellipse(i, j, r, r);
       }
 
