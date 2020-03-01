@@ -11,10 +11,10 @@ float increment = 0.1;
 
 OpenSimplexNoise noise;
 
-  float xoff = 0.0; // Start xoff at 0
-  float yoff = 0.0;
-  float zoff = 0.0;
-  int res = 15;
+float xoff = 0.0; // Start xoff at 0
+float yoff = 0.0;
+float zoff = 0.0;
+int res = 15;
 int rows, cols;
 
 void setup() {
@@ -23,7 +23,6 @@ void setup() {
   int cols = width/res;
 
   noise = new OpenSimplexNoise();
-
 }
 
 void draw() {
@@ -39,19 +38,16 @@ void draw() {
       yoff += increment;
       float chance = noise(xoff, yoff, zoff);
 
-
       if (chance > 0.4) {
         // Shimmery pattern
-        float r = random(res/3, res) * noise(xoff,yoff,zoff);
-        
+        //float r = random(res/3, res) * noise(xoff, yoff, zoff);
+
         // Islands
-        //float r = res* (noise(xoff,yoff,zoff))*1.3;
+        float r = res* (noise(xoff,yoff,zoff))*1.3;
         ellipse(i, j, r, r);
       }
-
-
     }
   }
 
-  //saveFrame("perf-preview.png");
+  //saveFrame("frames/frame#####.tif");
 }
