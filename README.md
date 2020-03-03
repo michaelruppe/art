@@ -5,6 +5,10 @@
 
 ### These are demos can run in your browser - they're built with [p5.js](https://p5js.org/)
 
+- **perf** a noise study with simplex noise to create an organic-looking environment. Reminiscent of cellular automata.
+  - [demo](https://michaelruppe.github.io/Project-Laura/perf_animated/perf-p5/)
+  ![](perf_animated/perf-p5/screenshot.jpg)
+
 - **morph**: More experiments with `noise()`
   - [demo3](https://michaelruppe.github.io/Project-Laura/morph/03/index.html) - In my opinion, the most visually pleasing demo. Now with *asymmetry*.
   - [demo5](https://michaelruppe.github.io/Project-Laura/morph/05/index.html) - R,G,B entities
@@ -27,14 +31,3 @@
 ### These are demos built with [Processing](https://processing.org/).
 You'll have to download the file/repo to run them.
 - [solar system simple](solar_system_simple/): Simulate a solar system with simple physics engine. Elliptical orbits made by calculating velocity for circular orbit then randomly tweaking.
-
-
-### TODO
-Projects to attempt or further experiment with
- - Animage perf
- - polywave: animate
- - finish firefly
- - Sun with many planets generated at same point, but orbital velocity is random, centred around circular.
- - nested, fixed orbits. path tracing
- - shape division
- - emergent behaviour: boids
