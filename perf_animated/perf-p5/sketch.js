@@ -2,14 +2,17 @@
  * Perf (Animated)
  * Michael Ruppe, Feb 2020
  *
- * A noise study - generate island masses and texture with ellipses
+ * A noise study - generate island masses and texture with ellipses and
+ * Simplex Noise.
+ *
+ * Audio kindly provided by Hidden Sky:
+ * https://hiddensky.bandcamp.com/
  *
  *****************************************/
 
 let increment = 0.1;
-
-
 let noise;
+let alpha = 255;
 
   let xoff = 0.0; // Start xoff at 0
   let yoff = 0.0;
@@ -29,9 +32,8 @@ function setup() {
 }
 
 function draw() {
-  // background(255,229,180);
   background(0);
-  // fill(189,169,133); noStroke();
+
   fill(255); noStroke();
   xoff=0;
   yoff=0;
@@ -56,9 +58,36 @@ function draw() {
 
     }
   }
+
+  displayHelperText(alpha-=1);
 }
 
+function displayHelperText(_alpha) {
+  let a = _alpha;
+  fill(0, a);
+  rectMode(RADIUS);
+  rect(width/2,height/2, 600,300);
+  fill(255,a);
+  let s = 'Click to toggle audio';
+  textAlign(CENTER, CENTER);
+  textSize(60);
+  text(s, width/2, height/2);
+
+}
 
 function windowResized() {
   resizeCanvas(windowWidth+10, windowHeight+10);
+}
+
+
+// Toggle the audio on click
+document.addEventListener('click', musicPlay);
+function musicPlay() {
+  let audio = document.getElementById('player');
+  if (audio.currentTime == 0) {
+    audio.play();
+  } else {
+    audio.pause();
+    audio.currentTime = 0;
+  }
 }
