@@ -17,13 +17,14 @@ let noise;
   let res = 15;
 let rows, cols;
 
+
 function setup() {
   let canvas = createCanvas(windowWidth+10,windowHeight+10);
   canvas.parent("sketch-holder");
   let rows = height/res;
   let cols = width/res;
 
-  simplex = new openSimplexNoise();
+  simplex = new openSimplexNoise(3600*hour()+60*minute()*+second()); // Initialise with a (almost) unique seed
 
 }
 
@@ -55,4 +56,9 @@ function draw() {
 
     }
   }
+}
+
+
+function windowResized() {
+  resizeCanvas(windowWidth+10, windowHeight+10);
 }
