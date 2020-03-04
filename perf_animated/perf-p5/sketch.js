@@ -1,14 +1,15 @@
-/******************************************
+/******************************************************************************
  * Perf (Animated)
  * Michael Ruppe, Feb 2020
  *
- * A noise study - generate island masses and texture with ellipses and
- * Simplex Noise.
+ * A noise study - Simple creatures (colonies?) grow, move, interact and die.
+ * Reminiscent of cellular-automata, this behaviour is generated with
+ * simplex noise.
  *
- * Audio kindly provided by Hidden Sky:
+ * Audio: Hidden Sky - Day 10
  * https://hiddensky.bandcamp.com/
  *
- *****************************************/
+ ******************************************************************************/
 
 let increment = 0.1;
 let noise;
@@ -82,7 +83,7 @@ function windowResized() {
   // recalculate density for small screens
   if(windowWidth * windowHeight < 600*600) res = resOriginal/2.5;
   else {res = resOriginal;}
-  
+
   rows = height/res;
   cols = width/res;
 }
