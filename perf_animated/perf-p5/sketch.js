@@ -17,13 +17,15 @@ let alpha = 255;
   let xoff = 0.0; // Start xoff at 0
   let yoff = 0.0;
   let zoff = 0.0;
-  let res = 15;
+  let resOriginal = 15;
+  let res = resOriginal;
 let rows, cols;
 
 
 function setup() {
   let canvas = createCanvas(windowWidth+10,windowHeight+10);
   canvas.parent("sketch-holder");
+  if(windowWidth * windowHeight < 600*600) res = resOriginal/2.5; // Increase density for small screens
   let rows = height/res;
   let cols = width/res;
 
@@ -77,6 +79,12 @@ function displayHelperText(_alpha) {
 
 function windowResized() {
   resizeCanvas(windowWidth+10, windowHeight+10);
+  // recalculate density for small screens
+  if(windowWidth * windowHeight < 600*600) res = resOriginal/2.5;
+  else {res = resOriginal;}
+  
+  rows = height/res;
+  cols = width/res;
 }
 
 
