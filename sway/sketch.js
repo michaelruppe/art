@@ -2,14 +2,14 @@
  * Sway
  * Michael Ruppe, Feb 2020
  *
- * A smooth, colourful tangle.
+ * A smoky, colourful tangle.
  * Each particle is assigned its own flow field to move it around.
  * Each particle-pair will draw with a colour chosen out of a palette.
  *
  ******************************************************************************/
 
 let alphaMax = 15; // Max alpha for a line
-
+let numParticles = 50;
 let inc = 0.01;
 let scl = 100;
 let cols, rows;
@@ -38,12 +38,30 @@ function setup() {
     60 * minute() +
     second());
 
-  for (let i = 0; i < 50; i++) {
-    particles.push(new Particle());
-    simplex.push(new openSimplexNoise(seedTime + random(1000)));
+  // ******************* Initialise particles *******************
+  // Decide what format to start with (line, ring, random)
+  let select = random(100); // Roll the dice
+  let x,y,r = min(width,height)/4;
+  for (let i = 0; i < numParticles; i++) {
+    // Need a flowfield and simplex instance for each particle
     flowfield.push(new Array(cols * rows));
-  }
+    simplex.push(new openSimplexNoise(seedTime + random(1000)));
 
+    // generate the starting configuration
+    if (select < 33) {
+      // horizontal line
+      x = random(width); y = height/2;
+    } else if (select < 66) {
+      // start at center
+      x = random(width); y = random(height);
+    } else {
+      // a ring of particles
+      let theta = random(TWO_PI);
+      x = width/2 + r*cos(theta);
+      y = height/2 + r*sin(theta);
+    }
+    particles.push(new Particle(x,y));
+  }
 }
 
 function draw() {

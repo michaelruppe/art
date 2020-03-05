@@ -1,7 +1,7 @@
 // Basic particle physics engine
 
-function Particle() {
-  this.pos = createVector(random(width),height/2);
+function Particle(_x, _y) {
+  this.pos = createVector(_x,_y);
   this.vel = createVector(0,0);
   this.acc = createVector(0,0);
   this.maxspeed = 1;
