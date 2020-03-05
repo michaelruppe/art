@@ -3,9 +3,13 @@
 
 ### These are demos can run in your browser - they're built with [p5.js](https://p5js.org/)
 
-- **perf** a noise study with simplex noise to create an organic-looking environment. Reminiscent of cellular automata.
+- **[sway](https://michaelruppe.github.io/Project-Laura/sway/)**. A smooth, colourful tangle - each particle is assigned its own flow field to move within. Each particle-pair will draw with a colour chosen out of a pallette.
+![](sway/screenshot.png)
+
+
+- **[perf](https://michaelruppe.github.io/Project-Laura/perf_animated/perf-p5/)**. A noise study with simplex noise to create an organic-looking environment. Reminiscent of cellular automata.
 ![](perf_animated/perf-p5/demo.gif)
-  - [demo](https://michaelruppe.github.io/Project-Laura/perf_animated/perf-p5/)
+
 
 
 - **morph**: More experiments with `noise()`
