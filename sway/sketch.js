@@ -29,6 +29,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   cols = floor(width / scl);
   rows = floor(height / scl);
+  (random(100) < 1) ? background(255) : background(0);
 
   // Unique seed noise
   let seedTime = (3600 * 24 * 30 * 12 * year() +
