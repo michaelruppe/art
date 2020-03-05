@@ -1,5 +1,11 @@
-# Project-Laura
-*Code-art project to show Laura beautiful things can be made with math and algorithms.*
+# Project Laura
+*A code-art project to explore beautiful things can be made with math, chaos and randomness.*
+![](sway/screenshot.png)
+<div style="text-align: center"> <a href="https://michaelruppe.github.io/Project-Laura/sway/">Sway</a> </div>
+
+---
+
+
 
 ### These are demos can run in your browser - they're built with [p5.js](https://p5js.org/)
 
