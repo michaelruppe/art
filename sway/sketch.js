@@ -39,7 +39,7 @@ function setup() {
     60 * minute() +
     second());
 
-  // explicitly initialise empty arrays here (for when reset() is called)
+  // explicitly initialise empty arrays here (for when setup() is called on mouse click)
   particles = []; simplex = []; flowfield = [];
 
   // ******************* Initialise particles *******************
