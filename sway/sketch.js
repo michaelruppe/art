@@ -39,6 +39,9 @@ function setup() {
     60 * minute() +
     second());
 
+  // explicitly initialise empty arrays here (for when reset() is called)
+  particles = []; simplex = []; flowfield = [];
+
   // ******************* Initialise particles *******************
   // Decide what format to start with (line, ring, random)
   let select = random(100); // Roll the dice
@@ -166,4 +169,8 @@ setPalette = function() {
     color(242, 212, 186, 1)
   ]);
 
+}
+
+function mousePressed(){
+    setup();
 }
