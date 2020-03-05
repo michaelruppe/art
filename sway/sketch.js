@@ -4,7 +4,7 @@
  *
  * A smooth, colourful tangle.
  * Each particle is assigned its own flow field to move it around.
- * Each particle-pair will draw with a colour chosen out of a pallette.
+ * Each particle-pair will draw with a colour chosen out of a palette.
  *
  ******************************************************************************/
 
@@ -14,7 +14,7 @@ let inc = 0.01;
 let scl = 100;
 let cols, rows;
 let zoff = 100; // near zero, all particles move in the same direction at start
-let pallette, colours;
+let palette, colours;
 
 let particles = [],
   simplex = [],
@@ -22,9 +22,9 @@ let particles = [],
 
 
 function setup() {
-  pallette = new Array();
-  setPallette();
-  colours = random(pallette);
+  palette = new Array();
+  setPalette();
+  colours = random(palette);
 
   createCanvas(windowWidth, windowHeight);
   cols = floor(width / scl);
@@ -105,10 +105,10 @@ linkup = function() {
 
 
 // Populates an array with several pallettes that can be selected by the script.
-setPallette = function() {
+setPalette = function() {
 
   // Forest
-  pallette.push([color(109, 64, 13),
+  palette.push([color(109, 64, 13),
     color(3, 137, 113),
     color(59, 158, 184),
     color(113, 193, 108),
@@ -116,7 +116,7 @@ setPallette = function() {
   ]);
 
   // Warm
-  pallette.push([color(211, 217, 35),
+  palette.push([color(211, 217, 35),
     color(214, 217, 143),
     color(241, 242, 206),
     color(140, 91, 48),
@@ -124,7 +124,7 @@ setPallette = function() {
   ]);
 
   // Night
-  pallette.push([color(1, 2, 35, 1),
+  palette.push([color(1, 2, 35, 1),
     color(2, 11, 61, 1),
     color(124, 158, 212, 1),
     color(117, 179, 212, 1),
@@ -132,7 +132,7 @@ setPallette = function() {
   ]);
 
   // Soda
-  pallette.push([color(2, 7, 114),
+  palette.push([color(2, 7, 114),
     color(131, 191, 3),
     color(242, 202, 4),
     color(242, 127, 26),
@@ -140,7 +140,7 @@ setPallette = function() {
   ]);
 
   // Beach
-  pallette.push([color(91, 193, 216, 1),
+  palette.push([color(91, 193, 216, 1),
     color(167, 228, 242, 1),
     color(101, 205, 216, 1),
     color(216, 186, 160, 1),
