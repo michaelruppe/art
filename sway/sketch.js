@@ -69,26 +69,33 @@ function setup() {
 }
 
 function draw() {
-  for (let i = 0; i < flowfield.length; i++) {
-    let yoff = 0;
-    for (let y = 0; y < rows; y++) {
-      let xoff = 0;
-      for (let x = 0; x < cols; x++) {
-        let index = (x + y * cols);
-        let angle = simplex[i].noise3D(xoff, yoff, zoff) * TWO_PI;
-        xoff += inc;
-        let v = p5.Vector.fromAngle(angle);
-        v.setMag(0.05); // for force
-        flowfield[i][index] = v; // Store the calculated vector in the array for later
-      }
-      yoff += inc;
-    }
-
-  }
+  // for (let i = 0; i < flowfield.length; i++) {
+  //   let yoff = 0;
+  //   for (let y = 0; y < rows; y++) {
+  //     let xoff = 0;
+  //     for (let x = 0; x < cols; x++) {
+  //       let index = (x + y * cols);
+  //       let angle = simplex[i].noise3D(xoff, yoff, zoff) * TWO_PI;
+  //       xoff += inc;
+  //       let v = p5.Vector.fromAngle(angle);
+  //       v.setMag(0.05); // for force
+  //       flowfield[i][index] = v; // Store the calculated vector in the array for later
+  //     }
+  //     yoff += inc;
+  //   }
+  //
+  // }
   zoff += 0.002
-
+  // generate ONLY the vector relevant to the particle. Not the whole flow field
   for (let i = 0; i < particles.length; i++) {
-    particles[i].follow(flowfield[i]);
+    var xGrid = round(particles[i].pos.x / scl)*inc;
+    var yGrid = round(particles[i].pos.y / scl)*inc;
+    let ang = simplex[i].noise3D(xGrid, yGrid, zoff) * TWO_PI;
+    let ve = p5.Vector.fromAngle(ang);
+    ve.setMag(0.05); // for force
+    particles[i].applyForce(ve);
+
+    // particles[i].follow(flowfield[i]);
     particles[i].update();
     particles[i].edges();
     // particles[i].show();
