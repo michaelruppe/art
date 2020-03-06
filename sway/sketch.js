@@ -87,6 +87,7 @@ function draw() {
   // }
   zoff += 0.002
   // generate ONLY the vector relevant to the particle. Not the whole flow field
+  // To FIX: the behaviour is a bit different to the master branch though...
   for (let i = 0; i < particles.length; i++) {
     var xGrid = round(particles[i].pos.x / scl)*inc;
     var yGrid = round(particles[i].pos.y / scl)*inc;
