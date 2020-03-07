@@ -20,7 +20,7 @@ function setup() {
 
 
   simplex = new openSimplexNoise();
-  scl = width / 25;
+  scl = max(width,height) / 20; // keep the scale manageable
   rows = floor(height / scl);
   cols = floor(width / scl);
 
