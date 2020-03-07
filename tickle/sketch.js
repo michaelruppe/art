@@ -40,8 +40,8 @@ function draw() {
   randomSeed(sequenceSeed); // Re-seed the random sequence - this drives our colour selector and we want constant, random colours
   for (let i = 0; i < cols; i++) {
     for (let j = 0; j <= rows; j++) {
-      mouseXnorm = mouseX / width;
-      mouseYnorm = mouseY / height;
+      mouseXnorm = 3* mouseX / width;
+      mouseYnorm = 3* mouseY / height;
 
       fill(random(colours));
       noStroke();
@@ -54,9 +54,13 @@ function drawShape(_x, _y, _xofs, _yofs) {
   beginShape();
   let numPoints = 25;
   let r = scl / 2;
+
   // decouple noise axes by large distance between shapes - prevents regular artefacts appearing
   let xOfs = 100 * _x + _xofs; // precalculate outside the for-loop
   let yOfs = 10000 * _y + _yofs;
+
+  let centreOfsX = simplex.noise4D(xOfs, yOfs, _xofs,_yofs)*scl/5; // Jiggle the centre of mass
+  let centreOfsY = simplex.noise4D(xOfs, yOfs, _xofs+10000,_yofs+10000)*scl/5;
 
   for (theta = 0; theta < TWO_PI; theta += (TWO_PI / numPoints)) {
     let cosTheta = cos(theta); // precalculate for later
@@ -70,7 +74,7 @@ function drawShape(_x, _y, _xofs, _yofs) {
     let xn = radius * cosTheta;
     let yn = radius * sinTheta;
 
-    vertex(xn + _x, yn + _y);
+    vertex(xn + _x + centreOfsX, yn + _y + centreOfsY);
   }
   endShape(CLOSE);
 }
