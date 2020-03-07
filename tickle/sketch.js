@@ -17,9 +17,8 @@ function setup() {
   let canvas = createCanvas(window.innerWidth, window.innerHeight);
   canvas.parent('sketch-holder');
 
-
   simplex = new openSimplexNoise();
-  scl = max(width,height) / 20; // keep the scale manageable
+  scl = max(width, height) / 20; // keep the scale manageable
   rows = floor(height / scl);
   cols = floor(width / scl);
 
@@ -27,7 +26,8 @@ function setup() {
   setPalette();
   colours = palette[paletteIndex]
 
-  randomSeed(second());
+  // Unique blob-colour sequence
+  randomSeed(second() + random(100));
   sequenceSeed = random();
 
 }
@@ -39,8 +39,8 @@ function draw() {
   randomSeed(sequenceSeed); // Re-seed the random sequence - this drives our colour selector and we want constant, random colours
   for (let i = 0; i < cols; i++) {
     for (let j = 0; j <= rows; j++) {
-      mouseXnorm = 3* mouseX / width;
-      mouseYnorm = 3* mouseY / height;
+      mouseXnorm = 3 * mouseX / width;
+      mouseYnorm = 3 * mouseY / height;
 
       fill(random(colours));
       noStroke();
@@ -58,8 +58,8 @@ function drawShape(_x, _y, _xofs, _yofs) {
   let xOfs = 100 * _x + _xofs; // precalculate outside the for-loop
   let yOfs = 10000 * _y + _yofs;
 
-  let centreOfsX = simplex.noise4D(xOfs, yOfs, _xofs,_yofs)*scl/5; // Jiggle the centre of mass
-  let centreOfsY = simplex.noise4D(xOfs, yOfs, _xofs+10000,_yofs+10000)*scl/5;
+  let centreOfsX = simplex.noise4D(xOfs, yOfs, _xofs, _yofs) * scl / 5; // Jiggle the centre of mass
+  let centreOfsY = simplex.noise4D(xOfs, yOfs, _xofs + 10000, _yofs + 10000) * scl / 5;
 
   for (theta = 0; theta < TWO_PI; theta += (TWO_PI / numPoints)) {
     let cosTheta = cos(theta); // precalculate for later
