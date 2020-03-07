@@ -12,7 +12,6 @@ let scl, rows, cols;
 let inc = 1;
 let palette, colours, paletteIndex = 0;
 let sequenceSeed;
-let mouseFlag = false;
 
 function setup() {
   let canvas = createCanvas(window.innerWidth, window.innerHeight);
