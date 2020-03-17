@@ -12,6 +12,7 @@ let scl, rows, cols;
 let inc = 1;
 let palette, colours, paletteIndex = 0;
 let sequenceSeed;
+let squidges = [];
 
 function setup() {
   let canvas = createCanvas(window.innerWidth, window.innerHeight);
@@ -30,52 +31,70 @@ function setup() {
   randomSeed(second() + random(100));
   sequenceSeed = random();
 
+  for (let i = 0; i < cols; i++) {
+    for (let j = 0; j <= rows; j++) {
+      squidges.push( new Squidge(i*scl, j*scl, colours));
+    }
+  }
+
 }
 
 function draw() {
   let ofs = 0;
   background(255);
   translate(scl / 2, scl / 2);
-  randomSeed(sequenceSeed); // Re-seed the random sequence - this drives our colour selector and we want constant, random colours
-  for (let i = 0; i < cols; i++) {
-    for (let j = 0; j <= rows; j++) {
-      mouseXnorm = 3 * mouseX / width;
-      mouseYnorm = 3 * mouseY / height;
-
-      fill(random(colours));
-      noStroke();
-      drawShape(i * scl, j * scl, mouseXnorm, mouseYnorm);
-    }
-  }
+  for (s of squidges) s.draw(mouseX, mouseY);
 }
 
-function drawShape(_x, _y, _xofs, _yofs) {
-  beginShape();
-  let numPoints = 25;
-  let r = scl / 2;
 
-  // decouple noise axes by large distance between shapes - prevents regular artefacts appearing
-  let xOfs = 100 * _x + _xofs; // precalculate outside the for-loop
-  let yOfs = 10000 * _y + _yofs;
+function Squidge(_x, _y, _colourArray) {
+  this.x = _x;
+  this.y = _y;
+  this.colour = random(_colourArray);
 
-  let centreOfsX = simplex.noise4D(xOfs, yOfs, _xofs, _yofs) * scl / 5; // Jiggle the centre of mass
-  let centreOfsY = simplex.noise4D(xOfs, yOfs, _xofs + 10000, _yofs + 10000) * scl / 5;
 
-  for (theta = 0; theta < TWO_PI; theta += (TWO_PI / numPoints)) {
-    let cosTheta = cos(theta); // precalculate for later
-    let sinTheta = sin(theta);
-    // use the unit circle (x,y) points as inputs for the noise function
-    let x = 0.5 * cosTheta + 1;
-    let y = 0.5 * sinTheta + 1;
+  this.draw = function(_xnoise, _ynoise) {
+    let distance = dist(this.x, this.y, _xnoise, _ynoise);
+    // let decay = map (distance, 0,0.3*width, 1,0, true);
+    let decay = pow(2.71828, -5*distance/width);
+    let mouseXnorm = decay;
+    let mouseYnorm = decay;
+    // let mouseXnorm = (3* _xnoise / width) * decay;
+    // let mouseYnorm = (3* _ynoise / height) * decay;
 
-    // Add noise
-    let radius = r * (1 + simplex.noise4D(x, y, xOfs, yOfs)) / 2;
-    let xn = radius * cosTheta;
-    let yn = radius * sinTheta;
+    fill(this.colour);
+    beginShape();
+    let numPoints = 25;
+    let r = scl / 2;
 
-    vertex(xn + _x + centreOfsX, yn + _y + centreOfsY);
+    // decouple noise axes by large distance between shapes - prevents regular artefacts appearing
+    let xOfs = 100 * this.x + mouseXnorm; // precalculate outside the for-loop
+    let yOfs = 10000 * this.y + mouseYnorm;
+
+    // let centreOfsX = simplex.noise4D(xOfs, yOfs, mouseXnorm, mouseYnorm) * scl / 5; // Jiggle the centre of mass
+    // let centreOfsY = simplex.noise4D(xOfs, yOfs, mouseXnorm + 10000, mouseYnorm + 10000) * scl / 5;
+
+    let centreOfsX = 0;
+    let centreOfsY = 0;
+    
+    for (let theta = 0; theta < TWO_PI; theta += (TWO_PI / numPoints)) {
+      cosTheta = cos(theta); // precalculate for later
+      sinTheta = sin(theta);
+      // use the unit circle (x,y) points as inputs for the noise function
+      px = 0.5 * cosTheta + 1;
+      py = 0.5 * sinTheta + 1;
+
+      // Add noise
+      let radius = r * (1 + simplex.noise4D(px, py, xOfs, yOfs)) / 2;
+      let xn = radius * cosTheta;
+      let yn = radius * sinTheta;
+
+      vertex(xn + this.x + centreOfsX, yn + this.y + centreOfsY);
+    }
+    endShape(CLOSE);
+
   }
-  endShape(CLOSE);
+
 }
 
 
