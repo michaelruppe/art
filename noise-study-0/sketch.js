@@ -20,7 +20,7 @@ function draw() {
 
     beginShape();
     for (let j = paddingW; j < width/2 - paddingW/2; j++ ) {
-      vertex(j, i + 50*noise(i,0.1*j, zoff));
+      vertex(j, i + 50*noise(i,0.05*j, zoff));
     }
     endShape(OPEN);
   }
