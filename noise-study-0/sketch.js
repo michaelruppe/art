@@ -8,6 +8,7 @@ function setup() {
   paddingW = width/10
   paddingH = height/4
   simplex = new openSimplexNoise();
+  frameRate(30);
 }
 
 function draw() {
