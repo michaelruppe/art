@@ -16,7 +16,7 @@ function draw() {
   y = 0;
   background(255);
   randomSeed(0);
-  let chance = 0.5 + 0.4 * sin(frameCount / 1000);
+  let chance = 0.5 + 0.4 * sin(frameCount / 100);
   while(y < height) {
     if (random(1) < chance) {
       line(x,y,x+scl,y+scl);
