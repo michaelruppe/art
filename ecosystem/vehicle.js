@@ -54,7 +54,7 @@ function Vehicle(x, y, dna) {
     rotate(theta);
 
     // Debugging information
-    if (debug !== undefined) {
+    if (debug === true) {
       stroke(0,255,0); noFill();
       line(0,0,0, 20*this.dna[0]);
       ellipse(0,0, this.dna[2] * 2)

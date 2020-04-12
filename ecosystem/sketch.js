@@ -7,6 +7,7 @@
 let vehicles = [];
 let food = [];
 let poison = [];
+let debug;
 
 function setup() {
   createCanvas(600,600)
@@ -20,6 +21,8 @@ function setup() {
   for (let i = 0; i < 20; i++){
     poison.push(createVector(random(width),random(height)));
   }
+
+  debug = createCheckbox('Debug info')
 }
 
 function draw() {
@@ -40,7 +43,7 @@ function draw() {
     vehicles[i].boundaries()
     vehicles[i].behaviours(food, poison)
     vehicles[i].update()
-    vehicles[i].show()
+    vehicles[i].show(debug.checked())
 
     var newVehicle = vehicles[i].breed();
     if (newVehicle != null) {
