@@ -24,13 +24,14 @@ function setup() {
     }
   }
   cells[w*floor(i/2) + floor(j/2)] = 1
-
+    
+  rectMode(CENTER)
 
 }
 
 function draw() {
   background(255)
-  // translate(scale/2,scale/2)
+  translate(scale/2,scale/2)
   for (i = 0; i < w; i++) {
     for (j=0; j < h; j++) {
       let cell = cells[j*w + h]
