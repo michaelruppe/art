@@ -7,16 +7,25 @@
 
  ******************************************************************************/
 
+let numTiles = 33
 let scale = 20
 let w,h
 let cells = []
 let nextCells = []
+
+let button, reset, slider
+let state
+let initialRun = true
+
 function setup() {
-  frameRate(1)
-  canvas = createCanvas(420,420)
+  state = 'setup'
+  canvas = createCanvas(numTiles*scale+1,numTiles*scale+1)
+  frameRate(30)
+  canvas.mouseClicked(clickEvent)
   w = floor(width/scale)
   h = floor(height/scale)
   console.log(w,h)
+  cells = []
   for (i = 0; i < w; i++) {
     for (j = 0; j < h; j++) {
       cells.push(0)
@@ -24,9 +33,22 @@ function setup() {
     }
   }
   cells[w*floor(i/2) + floor(j/2)] = 1
-    
+
   rectMode(CENTER)
 
+  if (initialRun) {
+    initialRun = false
+    button = createButton("Start");
+    button.position(10,height+10)
+    button.mouseClicked(start)
+    reset = createButton("Reset");
+    reset.position(200,height+10)
+    reset.mouseClicked(setup)
+
+    speedSlider = createSlider(1,30,1)
+    speedSlider.position(width-150,height+10)
+    speedSlider.style('width','150px')
+  }
 }
 
 function draw() {
@@ -43,36 +65,53 @@ function draw() {
     }
   }
 
-  // update
-  for (i = 0; i < w; i++) {
-    for (j=0 ; j < h; j++) {
-      let count = 0
+  if (state == 'run') {
+    frameRate(speedSlider.value())
+    // update
+    for (i = 0; i < w; i++) {
+      for (j=0 ; j < h; j++) {
+        let count = 0
 
-      // up
-      if (j > 0) {
-        count += cells[(j-1)*w + i]
-        if (i > 0) count += cells[(j-1)*w + (i-1)]
-        if (i < w-1) count += cells[(j-1)*w + (i+1)]
+        // up
+        if (j > 0) {
+          count += cells[(j-1)*w + i]
+          if (i > 0) count += cells[(j-1)*w + (i-1)]
+          if (i < w-1) count += cells[(j-1)*w + (i+1)]
+        }
+        // down
+        if (j < h-1) {
+          count += cells[(j+1)*w + i]
+          if (i > 0) count += cells[(j+1)*w + (i-1)]
+          if (i < w-1) count += cells[(j+1)*w + (i+1)]
+        }
+        // left
+        if (i > 0) count += cells[j*w + (i-1)]
+        // right
+        if (i < w-1) count += cells[j*w + (i+1)]
+
+
+        // cell becomes alive if currently touching odd numbers
+        if (count % 2 != 0) nextCells[j*w + i] = 1
+        else nextCells[j*w + i] = 0
+
       }
-      // down
-      if (j < h-1) {
-        count += cells[(j+1)*w + i]
-        if (i > 0) count += cells[(j+1)*w + (i-1)]
-        if (i < w-1) count += cells[(j+1)*w + (i+1)]
-      }
-      // left
-      if (i > 0) count += cells[j*w + (i-1)]
-      // right
-      if (i < w-1) count += cells[j*w + (i+1)]
 
-
-      // cell becomes alive if currently touching odd numbers
-      if (count % 2 != 0) nextCells[j*w + i] = 1
-      else nextCells[j*w + i] = 0
-
-    }
   }
   arrayCopy(nextCells, cells)
-  // delayTime(1)
-  // noLoop()
+  }
+
+}
+
+
+function clickEvent() {
+  if (state == 'setup'){
+    x = round((mouseX+scale/2) / scale)-1
+    y = round((mouseY+scale/2) / scale)-1
+    i = y*w + x
+    cells[i] = !cells[i]
+  }
+}
+
+function start() {
+  state = 'run'
 }
