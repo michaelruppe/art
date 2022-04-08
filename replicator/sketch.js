@@ -45,7 +45,7 @@ function setup() {
     reset.position(200,height+10)
     reset.mouseClicked(setup)
 
-    speedSlider = createSlider(1,30,1)
+    speedSlider = createSlider(1,10,1)
     speedSlider.position(width-150,height+10)
     speedSlider.style('width','150px')
   }
